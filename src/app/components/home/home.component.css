@@ -6,7 +6,7 @@
 .pageBox {
   min-height: 160px;
   background-color: #1e293b;
-  margin: 0 -1rem;
+  margin: 0 1rem;
   font-size: 36px;
 }
 .pageContent {
