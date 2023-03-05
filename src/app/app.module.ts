@@ -21,8 +21,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AddcategoryComponent } from './components/category/addcategory/addcategory.component';
-import { CategoryComponent } from './components/category/category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthorComponent } from './components/author/authorList/author.component';
+import { AddauthorComponent } from './components/author/addauthor/addauthor.component';
+import { CategoryComponent } from './components/category/categoryList/category.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     AddcategoryComponent,
     CategoryComponent,
+    AuthorComponent,
+    AddauthorComponent,
   ],
   imports: [
     BrowserModule,
