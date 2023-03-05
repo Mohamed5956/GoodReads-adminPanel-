@@ -1,13 +1,19 @@
 <h1 mat-dialog-title>Add Category : </h1>
 <div mat-dialog-content>
   <p>Enter category name</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Category:</mat-label>
-    <input matInput type="text" [(ngModel)]="newCat.name" placeholder="Enter category name here...">
-  </mat-form-field>
+  <form [formGroup]="categoryForm">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Category:</mat-label>
+      <input matInput type="text" placeholder="Enter category name here..." formControlName="name">
+      <mat-error *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">Category name is
+        required</mat-error>
+    </mat-form-field>
+  </form>
   <div mat-dialog-actions>
 
-    <button mat-button (click)="saveData()">Save</button>
-    <button mat-button (click)="closeDialog()">Cancel</button>
+    <button mat-button class="btn btn-light border me-2" [disabled]="categoryForm.invalid"
+      (click)="saveData()">Save</button>
+    <button mat-button class="btn btn-light border" (click)="closeDialog()">Cancel</button>
   </div>
 </div>
