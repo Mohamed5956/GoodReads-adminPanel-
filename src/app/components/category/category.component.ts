@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoryService } from 'src/app/services/category.service';
-import { AddcategoryComponent } from '../addcategory/addcategory.component';
+import { AddcategoryComponent } from './addcategory/addcategory.component';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',

@@ -20,7 +20,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { AddcategoryComponent } from './components/addcategory/addcategory.component';
+import { AddcategoryComponent } from './components/category/addcategory/addcategory.component';
 import { CategoryComponent } from './components/category/category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

@@ -2,13 +2,15 @@
 import { Component } from '@angular/core';
 
 import { MatDialogRef } from '@angular/material/dialog';
+import Swal from 'sweetalert2'
 
 import { Icategory } from 'src/app/models/icategory';
 import { CategoryService } from 'src/app/services/category.service';
 
-import { CategoryComponent } from '../category/category.component';
+import { CategoryComponent } from '../category.component';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class AddcategoryComponent {
   constructor(
     public dialogRef: MatDialogRef<CategoryComponent>,
     private categorySerivce: CategoryService,
+    private router: Router,
     private fb: FormBuilder,
   ) {
     this.categoryForm = this.fb.group({
@@ -34,11 +37,25 @@ export class AddcategoryComponent {
       name: this.categoryForm.value.name
     };
     console.log(this.newCat);
-    this.categorySerivce.addCategory(this.newCat).subscribe(response => {
-      console.log('Data saved successfully!', response);
-      this.dialogRef.close();
-    }, error => {
-      console.log('Error saving data:', error);
+    this.categorySerivce.addCategory(this.newCat).subscribe({
+      next: (v) => {
+        console.log(v);
+        Swal.fire(
+          'Added Succesfully!',
+          'You clicked the button!',
+          'success'
+        );
+        this.router.navigate(['/category']);
+        this.closeDialog()
+      },
+      error: (e) => {
+        console.error(e)
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
+      },
     });
   }
 
