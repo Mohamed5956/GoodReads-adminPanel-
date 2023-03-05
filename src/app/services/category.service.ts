@@ -10,8 +10,12 @@ import { Icategory } from '../models/icategory';
 })
 export class CategoryService {
 
+
   constructor(private http: HttpClient) { }
   getAllCategories(): Observable<Icategory[]> {
     return this.http.get<Icategory[]>(`${environment.APIBaseURL}/categories`);
+  }
+  addCategory(cat: Icategory): Observable<Icategory> {
+    return this.http.post<Icategory>(`${environment.APIBaseURL}/categories`, JSON.stringify(cat), { headers: { 'Content-Type': 'application/json' } });
   }
 }
