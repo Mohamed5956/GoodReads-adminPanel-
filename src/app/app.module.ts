@@ -25,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthorComponent } from './components/author/authorList/author.component';
 import { AddauthorComponent } from './components/author/addauthor/addauthor.component';
 import { CategoryComponent } from './components/category/categoryList/category.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CategoryComponent } from './components/category/categoryList/category.c
     MatInputModule,
     // forms module
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
