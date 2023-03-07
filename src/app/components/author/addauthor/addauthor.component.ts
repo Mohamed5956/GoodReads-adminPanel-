@@ -15,7 +15,7 @@ import { AuthorComponent } from '../authorList/author.component';
 export class AddauthorComponent {
   newAuthor: Iauthor = {}
   authorForm: FormGroup;
-
+  selectedImage!: File;
   constructor(
     public dialogRef: MatDialogRef<AuthorComponent>,
     private categorySerivce: AuthorService,
@@ -31,13 +31,14 @@ export class AddauthorComponent {
   }
 
   saveData() {
+    var formData: any = new FormData;
+    formData.append('photo', this.selectedImage, this.selectedImage.name);
     this.newAuthor = {
       firstName: this.authorForm.value.firstName,
       lastName: this.authorForm.value.lastName,
-      photo: this.authorForm.value.photo,
+      photo: this.selectedImage.name,
       birthDate: this.authorForm.value.birthDate
     };
-    console.log(this.authorForm);
     this.categorySerivce.addAuthor(this.newAuthor).subscribe({
       next: (v) => {
         console.log(v);
@@ -58,6 +59,11 @@ export class AddauthorComponent {
         })
       },
     });
+  }
+
+  onSelectedFile(event: any) {
+    this.selectedImage = <File>event.target.files[0];
+    console.log(this.selectedImage);
   }
 
   closeDialog() {
