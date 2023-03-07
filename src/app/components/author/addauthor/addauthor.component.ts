@@ -10,24 +10,24 @@ import { AuthorComponent } from '../authorList/author.component';
 @Component({
   selector: 'app-addauthor',
   templateUrl: './addauthor.component.html',
-  styleUrls: ['./addauthor.component.css']
+  styleUrls: ['./addauthor.component.css'],
 })
 export class AddauthorComponent {
-  newAuthor: Iauthor = {}
+  newAuthor: Iauthor = {};
   authorForm: FormGroup;
   selectedImage!: File;
   constructor(
     public dialogRef: MatDialogRef<AuthorComponent>,
     private categorySerivce: AuthorService,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {
     this.authorForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       photo: ['', Validators.required],
-      birthDate: ['', Validators.required]
-    })
+      birthDate: ['', Validators.required],
+    });
   }
 
   saveData() {
@@ -42,21 +42,17 @@ export class AddauthorComponent {
     this.categorySerivce.addAuthor(this.newAuthor).subscribe({
       next: (v) => {
         console.log(v);
-        Swal.fire(
-          'Added Succesfully!',
-          'You clicked the button!',
-          'success'
-        );
+        Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.router.navigate(['/authors']);
-        this.closeDialog()
+        this.closeDialog();
       },
       error: (e) => {
-        console.error(e)
+        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
-        })
+        });
       },
     });
   }
@@ -69,5 +65,4 @@ export class AddauthorComponent {
   closeDialog() {
     this.dialogRef.close();
   }
-
 }

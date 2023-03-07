@@ -27,6 +27,7 @@ import { AddauthorComponent } from './components/author/addauthor/addauthor.comp
 import { CategoryComponent } from './components/category/categoryList/category.component';
 import { AddbookComponent } from './components/book/addbook/addbook.component';
 import { BookListComponent } from './components/book/book-list/book-list.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { BookListComponent } from './components/book/book-list/book-list.compone
     MatInputModule,
     // forms module
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
