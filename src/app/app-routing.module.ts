@@ -1,16 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundError } from 'rxjs';
 import { AuthorComponent } from './components/author/authorList/author.component';
 import { CategoryComponent } from './components/category/categoryList/category.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AuthGuard } from './Guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'category', component: CategoryComponent },
-  { path: 'authors', component: AuthorComponent },
+  {
+    path: '', component: MainComponent, children: [
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'category', component: CategoryComponent, canActivate: [AuthGuard] },
+      { path: 'authors', component: AuthorComponent, canActivate: [AuthGuard] },
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: "**", component: NotFoundComponent }
 ];
 
 @NgModule({

@@ -28,6 +28,9 @@ import { CategoryComponent } from './components/category/categoryList/category.c
 import { AddbookComponent } from './components/book/addbook/addbook.component';
 import { BookListComponent } from './components/book/book-list/book-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { MatTableModule } from '@angular/material/table';
     AddauthorComponent,
     AddbookComponent,
     BookListComponent,
+    LoginComponent,
+    MainComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
