@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Iauthor } from 'src/app/models/iauthor';
 import { AuthorService } from 'src/app/services/author.service';
 import { AddauthorComponent } from '../addauthor/addauthor.component';
 
@@ -10,10 +11,10 @@ import { AddauthorComponent } from '../addauthor/addauthor.component';
 })
 export class AuthorComponent {
   constructor(private dialog: MatDialog, private authorService: AuthorService) {
-    let authors: Array<string>;
+    let authors: Array<Iauthor>;
   }
   ngOnInit() {
-    authors: ;
+    // authors: <Iauthor>
   }
   openDialog() {
     const dialogRef = this.dialog.open(AddauthorComponent, {
