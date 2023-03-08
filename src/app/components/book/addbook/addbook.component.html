@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Add Book :</h1>
+<div mat-dialog-content>
+  <p>Enter Book name</p>
+  <form [formGroup]="bookForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Book:</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Enter book title here..."
+        formControlTitle="title"
+      />
+      <mat-error
+        *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched"
+        >Book title is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>description:</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Enter book description here..."
+        formControlDescription="description"
+      />
+      <mat-error
+        *ngIf="
+          bookForm.get('description')?.invalid &&
+          bookForm.get('description')?.touched
+        "
+        >Book description is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>image:</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Enter book image here..."
+        formControlImage="image"
+      />
+      <mat-error
+        *ngIf="bookForm.get('image')?.invalid && bookForm.get('image')?.touched"
+        >Book image is required</mat-error
+      >
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      class="btn btn-light border me-2"
+      [disabled]="bookForm.invalid"
+      (click)="saveData()"
+    >
+      Save
+    </button>
+    <button mat-button class="btn btn-light border" (click)="closeDialog()">
+      Cancel
+    </button>
+  </div>
+</div>

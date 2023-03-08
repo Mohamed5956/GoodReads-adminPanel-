@@ -53,21 +53,11 @@
       >
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>photo :</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter photo here..."
-        formControlName="photo"
-      />
-      <mat-error
-        *ngIf="
-          authorForm.get('photo')?.invalid && authorForm.get('photo')?.touched
-        "
-        >Photo is required</mat-error
-      >
-    </mat-form-field>
+    <input type="file" (change)="onSelectedFile($event)" placeholder="Enter photo here..." formControlName="photo">
+    <mat-error *ngIf="authorForm.get('photo')?.invalid && authorForm.get('photo')?.touched">Photo is
+      required</mat-error>
+
+
   </form>
   <div mat-dialog-actions>
     <button

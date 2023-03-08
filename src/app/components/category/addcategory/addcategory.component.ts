@@ -7,10 +7,10 @@ import Swal from 'sweetalert2'
 import { Icategory } from 'src/app/models/icategory';
 import { CategoryService } from 'src/app/services/category.service';
 
-import { CategoryComponent } from '../../category/categoryList/category.component';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoryComponent } from '../categoryList/category.component';
 
 
 @Component({

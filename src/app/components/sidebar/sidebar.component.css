@@ -8,19 +8,37 @@ img {
 .mat-icon {
   vertical-align: center;
   margin-right: 1rem;
+  position: relative;
+  top: 5px;
 }
 .mat-divider {
   border-top: 2px solid white;
 }
-mat-list-item {
+/* mat-list-item {
   margin-bottom: 4px !important;
-  /* border-radius: 8px; */
+  border-radius: 8px;
 }
-mat-list-item a {
-  color: #94a3b8 !important;
+mat-list-item {
+  color: #ffffff !important;
   font-size: 1rem;
   text-decoration: none;
 }
 mat-list-item:hover {
   background-color: #2c3344 !important;
+} */
+.content {
+  margin: auto;
+  padding: 15px;
+}
+.content-anhor {
+  display: block;
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: rgb(222, 218, 244);
+  margin: 5px 5px;
+  padding: 10px;
+}
+
+.list-item-active {
+  background-color: rgba(14, 9, 91, 0.87);
 }

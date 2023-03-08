@@ -5,23 +5,27 @@
 >
   Add Category
 </button>
-<table mat-table [categories]="categories" class="mat-elevation-z8 demo-table">
+<table mat-table [dataSource]="categories" class="mat-elevation-z8 demo-table">
   <!-- Position Column -->
-  <ng-container matColumnDef="demo-position">
+  <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>ID.</th>
-    <td mat-cell *matCellDef="let element">{{ categories.position }}</td>
+    <td mat-cell *matCellDef="let element">{{ element._id }}</td>
   </ng-container>
 
   <!-- Name Column -->
-  <ng-container matColumnDef="demo-name">
+  <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ categories.name }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
   </ng-container>
 
   <!-- Actions Column -->
-  <ng-container matColumnDef="demo-weight">
+  <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
-    <td mat-cell *matCellDef="let element">{{ categories.actions }}</td>
+    <td mat-cell *matCellDef="let element">
+      <button class="btn btn-danger" (click)="deleteCategory(element._id)">
+        Delete
+      </button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

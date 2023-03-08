@@ -25,6 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthorComponent } from './components/author/authorList/author.component';
 import { AddauthorComponent } from './components/author/addauthor/addauthor.component';
 import { CategoryComponent } from './components/category/categoryList/category.component';
+import { AddbookComponent } from './components/book/addbook/addbook.component';
+import { BookListComponent } from './components/book/book-list/book-list.component';
 import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
@@ -38,6 +40,8 @@ import { MatTableModule } from '@angular/material/table';
     CategoryComponent,
     AuthorComponent,
     AddauthorComponent,
+    AddbookComponent,
+    BookListComponent,
   ],
   imports: [
     BrowserModule,
