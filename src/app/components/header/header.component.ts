@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,7 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent {
   @Output() toggleSide = new EventEmitter();
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private route: Router
   ) {
 
   }
@@ -17,6 +19,10 @@ export class HeaderComponent {
     this.toggleSide.emit()
   }
   logOut() {
-    this.authService.logOut();
+    this.authService.isLoggedSubject.subscribe(isLogged => {
+      if (!isLogged) {
+        this.route.navigate(['/login']);
+      }
+    });
   }
 }

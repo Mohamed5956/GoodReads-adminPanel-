@@ -19,7 +19,7 @@ export class AuthService {
     let token = req.clone(
       {
         setHeaders: {
-          Authorization: `Bearer ${localStorage.getItem('login')}`
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       })
     return next.handle(token);
@@ -29,7 +29,7 @@ export class AuthService {
     return this.http.post<Iuser>(`${environment.APIBaseURL}/login`, data);
   }
   loggedIn() {
-    if (localStorage.getItem('login') && localStorage.getItem('isAdmin') && localStorage.getItem('isAdmin') != 'false')
+    if (localStorage.getItem('token') && localStorage.getItem('isAdmin') && localStorage.getItem('isAdmin') != 'false')
       return true;
 
     return false;
@@ -37,6 +37,9 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('isAdmin');
+    this.isLoggedSubject.next(false);
   }
 
   admin() {

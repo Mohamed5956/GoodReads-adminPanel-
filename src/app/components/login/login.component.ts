@@ -20,6 +20,7 @@ export class LoginComponent {
     });
   }
   ngOnInit() {
+    this.authservice.logOut();
   }
   login() {
     if (this.formGroup.valid) {
