@@ -27,6 +27,7 @@ export class AddauthorComponent {
       lastName: ['', Validators.required],
       photo: ['', Validators.required],
       birthDate: ['', Validators.required],
+      description: ['', Validators.required],
     });
   }
 

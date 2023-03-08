@@ -32,6 +32,11 @@ import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
+
+
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,10 +69,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatTableModule,
     // forms module
     ReactiveFormsModule,
     FormsModule,
-    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
