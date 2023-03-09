@@ -8,12 +8,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthorService {
-
-  constructor(private http: HttpClient) { }
+  httpHeaders = {};
+  constructor(private http: HttpClient) {
+    this.httpHeaders = {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-token': `${localStorage.getItem('token')}`
+      }
+    }
+  }
   getAllAuthors(): Observable<Iauthor[]> {
     return this.http.get<Iauthor[]>(`${environment.APIBaseURL}/authors`);
   }
   addAuthor(author: Iauthor): Observable<Iauthor> {
-    return this.http.post<Iauthor>(`${environment.APIBaseURL}/authors`, JSON.stringify(author), { headers: { 'Content-Type': 'application/json' } });
+    return this.http.post<Iauthor>(`${environment.APIBaseURL}/authors`, JSON.stringify(author), this.httpHeaders);
   }
 }
