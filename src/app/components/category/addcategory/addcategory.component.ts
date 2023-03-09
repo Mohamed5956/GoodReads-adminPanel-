@@ -7,10 +7,10 @@ import Swal from 'sweetalert2'
 import { Icategory } from 'src/app/models/icategory';
 import { CategoryService } from 'src/app/services/category.service';
 
-import { CategoryComponent } from '../../category/categoryList/category.component';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoryComponent } from '../categoryList/category.component';
 
 
 @Component({
@@ -22,6 +22,7 @@ export class AddcategoryComponent {
   newCat: Icategory = {}
   categoryForm: FormGroup
   name: boolean = false;
+  selectedImage!: File;
   constructor(
     public dialogRef: MatDialogRef<CategoryComponent>,
     private categorySerivce: CategoryService,
@@ -29,12 +30,16 @@ export class AddcategoryComponent {
     private fb: FormBuilder,
   ) {
     this.categoryForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      image: ['']
     })
   }
   saveData() {
+    var formData: any = new FormData;
+    formData.append('image', this.selectedImage, this.selectedImage.name);
     this.newCat = {
-      name: this.categoryForm.value.name
+      name: this.categoryForm.value.name,
+      image: this.selectedImage.name,
     };
     console.log(this.newCat);
     this.categorySerivce.addCategory(this.newCat).subscribe({
@@ -58,7 +63,10 @@ export class AddcategoryComponent {
       },
     });
   }
-
+  onSelectedFile(event: any) {
+    this.selectedImage = <File>event.target.files[0];
+    console.log(this.selectedImage);
+  }
   closeDialog() {
     this.dialogRef.close();
   }

@@ -14,7 +14,7 @@ export class AuthorComponent {
     let authors: Array<Iauthor>;
   }
   ngOnInit() {
-    // authors: <Iauthor>
+    // authors: ;
   }
   openDialog() {
     const dialogRef = this.dialog.open(AddauthorComponent, {

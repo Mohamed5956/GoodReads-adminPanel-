@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,20 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HeaderComponent {
   @Output() toggleSide = new EventEmitter();
-  toggleSideBar(){
+  constructor(
+    private authService: AuthService,
+    private route: Router
+  ) {
+
+  }
+  toggleSideBar() {
     this.toggleSide.emit()
+  }
+  logOut() {
+    this.authService.isLoggedSubject.subscribe(isLogged => {
+      if (!isLogged) {
+        this.route.navigate(['/login']);
+      }
+    });
   }
 }

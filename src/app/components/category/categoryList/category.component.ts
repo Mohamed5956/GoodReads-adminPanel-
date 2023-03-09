@@ -11,14 +11,17 @@ import { MatTableModule } from '@angular/material/table';
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent {
+  categories: Icategory[];
   constructor(
     private dialog: MatDialog,
     private categoryService: CategoryService
-     categories:Array<any>
   ) {
+    this.categories = [];
   }
-  ngOnInit(categories:Array<any>) {
-    categories=new Array<Icategory>
+  ngOnInit() {
+    this.categoryService.getAllCategories().subscribe(catList => {
+      this.categories = catList;
+    });
   }
   openDialog() {
     const dialogRef = this.dialog.open(AddcategoryComponent, {

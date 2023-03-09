@@ -4,78 +4,59 @@
   <form [formGroup]="authorForm">
     <mat-form-field appearance="fill" class="me-2">
       <mat-label>First Name:</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter first name here..."
-        formControlName="firstName"
-      />
-      <mat-error
-        *ngIf="
+      <input matInput type="text" placeholder="Enter first name here..." formControlName="firstName" />
+      <mat-error *ngIf="
           authorForm.get('firstName')?.invalid &&
           authorForm.get('firstName')?.touched
-        "
-        >First Name is required</mat-error
-      >
+        ">First Name is required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Last Mame:</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter last Name here..."
-        formControlName="lastName"
-      />
-      <mat-error
-        *ngIf="
+      <input matInput type="text" placeholder="Enter last Name here..." formControlName="lastName" />
+      <mat-error *ngIf="
           authorForm.get('lastName')?.invalid &&
           authorForm.get('lastName')?.touched
-        "
-        >Last Name is required</mat-error
-      >
+        ">Last Name is required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="me-2">
       <mat-label>birth Date:</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter date here..."
-        formControlName="birthDate"
-      />
-      <mat-error
-        *ngIf="
+      <input matInput type="date" placeholder="Enter date here..." formControlName="birthDate" />
+      <mat-error *ngIf="
           authorForm.get('birthDate')?.invalid &&
           authorForm.get('birthDate')?.touched
-        "
-        >birth Date is required</mat-error
-      >
+        ">birth Date is required</mat-error>
+    </mat-form-field>
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Birth Date:</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="birthDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="
+      authorForm.get('birthDate')?.invalid &&
+      authorForm.get('birthDate')?.touched
+    ">birth Date is required</mat-error>
+    </mat-form-field> -->
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Description:</mat-label>
+      <textarea matInput placeholder="Author Description..." formControlName="description"></textarea>
+      <mat-error *ngIf="
+      authorForm.get('description')?.invalid &&
+      authorForm.get('description')?.touched
+    ">birth Date is required</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>photo :</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Enter photo here..."
-        formControlName="photo"
-      />
-      <mat-error
-        *ngIf="
-          authorForm.get('photo')?.invalid && authorForm.get('photo')?.touched
-        "
-        >Photo is required</mat-error
-      >
-    </mat-form-field>
+    <input type="file" (change)="onSelectedFile($event)" placeholder="Enter photo here..." formControlName="photo">
+    <mat-error *ngIf="authorForm.get('photo')?.invalid && authorForm.get('photo')?.touched">Photo is
+      required</mat-error>
+
+
   </form>
   <div mat-dialog-actions>
-    <button
-      mat-button
-      class="btn btn-light border me-2"
-      [disabled]="authorForm.invalid"
-      (click)="saveData()"
-    >
+    <button mat-button class="btn btn-light border me-2" [disabled]="authorForm.invalid" (click)="saveData()">
       Save
     </button>
     <button mat-button class="btn btn-light border" (click)="closeDialog()">

@@ -9,6 +9,11 @@
       <mat-error *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">Category name is
         required</mat-error>
     </mat-form-field>
+
+    <input type="file" (change)="onSelectedFile($event)" placeholder="Enter photo here..." formControlName="image">
+    <mat-error *ngIf="categoryForm.get('image')?.invalid && categoryForm.get('image')?.touched">Photo is
+      required</mat-error>
+
   </form>
   <div mat-dialog-actions>
 

@@ -25,7 +25,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthorComponent } from './components/author/authorList/author.component';
 import { AddauthorComponent } from './components/author/addauthor/addauthor.component';
 import { CategoryComponent } from './components/category/categoryList/category.component';
+import { AddbookComponent } from './components/book/addbook/addbook.component';
+import { BookListComponent } from './components/book/book-list/book-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+
+
+
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -38,6 +48,11 @@ import { MatTableModule } from '@angular/material/table';
     CategoryComponent,
     AuthorComponent,
     AddauthorComponent,
+    AddbookComponent,
+    BookListComponent,
+    LoginComponent,
+    MainComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,10 +69,11 @@ import { MatTableModule } from '@angular/material/table';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatTableModule,
     // forms module
     ReactiveFormsModule,
     FormsModule,
-    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
