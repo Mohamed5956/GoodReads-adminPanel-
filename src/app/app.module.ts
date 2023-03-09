@@ -12,6 +12,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from '@angular/material/select';
+
 // components
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -71,6 +73,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatInputModule,
     MatDatepickerModule,
     MatTableModule,
+    MatSelectModule,
     // forms module
     ReactiveFormsModule,
     FormsModule,

@@ -19,6 +19,7 @@ export class BookListComponent implements OnInit, OnChanges {
     'image',
     'description',
     'authorId',
+    'categoryId',
     'reviewId',
     'actions',
   ];
@@ -33,6 +34,7 @@ export class BookListComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.bookservice.getAllBooks().subscribe((bookList) => {
       this.books = bookList;
+      console.log(this.books);
     });
   }
   openDialog() {
