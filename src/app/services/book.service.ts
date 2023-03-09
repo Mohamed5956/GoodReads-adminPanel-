@@ -9,15 +9,23 @@ import { Ibook } from '../models/ibook';
   providedIn: 'root',
 })
 export class BookService {
-  constructor(private http: HttpClient) {}
+  httpHeaders = {};
+  constructor(private http: HttpClient) {
+    this.httpHeaders = {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-token': `${localStorage.getItem('token')}`,
+      },
+    };
+  }
   getAllBooks(): Observable<Ibook[]> {
     return this.http.get<Ibook[]>(`${environment.APIBaseURL}/books`);
   }
-  addBook(cat: Ibook): Observable<Ibook> {
+  addBook(book: Ibook): Observable<Ibook> {
     return this.http.post<Ibook>(
       `${environment.APIBaseURL}/books`,
-      JSON.stringify(cat),
-      { headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify(book),
+      this.httpHeaders
     );
   }
   deleteBook(id: string): Observable<Ibook> {
