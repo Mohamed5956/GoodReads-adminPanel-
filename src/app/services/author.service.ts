@@ -12,7 +12,6 @@ export class AuthorService {
   constructor(private http: HttpClient) {
     this.httpHeaders = {
       headers: {
-        'Content-Type': 'application/json',
         'x-token': `${localStorage.getItem('token')}`,
       },
     };
@@ -20,10 +19,10 @@ export class AuthorService {
   getAllAuthors(): Observable<Iauthor[]> {
     return this.http.get<Iauthor[]>(`${environment.APIBaseURL}/authors`);
   }
-  addAuthor(author: Iauthor): Observable<Iauthor> {
+  addAuthor(form: FormData): Observable<Iauthor> {
     return this.http.post<Iauthor>(
       `${environment.APIBaseURL}/authors`,
-      JSON.stringify(author),
+      form,
       this.httpHeaders
     );
   }

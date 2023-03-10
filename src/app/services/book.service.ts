@@ -13,8 +13,8 @@ export class BookService {
   constructor(private http: HttpClient) {
     this.httpHeaders = {
       headers: {
-        'Content-Type': 'application/json',
-        'x-token': `${localStorage.getItem('token')}`,
+        // 'Content-Type': 'application/json',
+        // 'x-token': `${localStorage.getItem('token')}`,
       },
     };
   }

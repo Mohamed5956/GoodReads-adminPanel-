@@ -38,6 +38,11 @@ export class AuthorComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(AddauthorComponent, {
       width: '500px',
     });
+    dialogRef.componentInstance.AuthorAdded.subscribe(() => {
+      this.authorService.getAllAuthors().subscribe((authList) => {
+        this.authors = authList;
+      });
+    })
   }
   ngOnChanges() {
     this.openDialog();
@@ -48,8 +53,7 @@ export class AuthorComponent implements OnInit, OnChanges {
       next: (v) => {
         console.log(v);
         Swal.fire('Deleted Succesfully!', 'You clicked the button!', 'success');
-        this.router.navigate(['/authors']);
-        window.location.reload();
+        this.authors = this.authors.filter(author => author._id !== id);
       },
       error: (e) => {
         console.error(e);

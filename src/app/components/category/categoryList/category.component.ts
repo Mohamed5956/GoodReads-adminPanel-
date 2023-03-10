@@ -31,6 +31,11 @@ export class CategoryComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(AddcategoryComponent, {
       width: '400px',
     });
+    dialogRef.componentInstance.categoryAdded.subscribe(() => {
+      this.categoryService.getAllCategories().subscribe((catList) => {
+        this.categories = catList;
+      });
+    });
   }
   ngOnChanges() {
     this.openDialog();
@@ -41,8 +46,7 @@ export class CategoryComponent implements OnInit, OnChanges {
       next: (v) => {
         console.log(v);
         Swal.fire('Deleted Succesfully!', 'You clicked the button!', 'success');
-        this.router.navigate(['/category']);
-        window.location.reload();
+        this.categories = this.categories.filter(c => c._id !== id);
       },
       error: (e) => {
         console.error(e);
