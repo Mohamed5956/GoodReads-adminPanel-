@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryComponent } from '../categoryList/category.component';
 
+import { EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-addcategory',
@@ -19,10 +20,11 @@ import { CategoryComponent } from '../categoryList/category.component';
   styleUrls: ['./addcategory.component.css']
 })
 export class AddcategoryComponent {
-  newCat: Icategory = {}
   categoryForm: FormGroup
   name: boolean = false;
   selectedImage!: File;
+  @Output() categoryAdded = new EventEmitter<boolean>();
+
   constructor(
     public dialogRef: MatDialogRef<CategoryComponent>,
     private categorySerivce: CategoryService,
@@ -36,13 +38,9 @@ export class AddcategoryComponent {
   }
   saveData() {
     var formData: any = new FormData;
+    formData.append('name', this.categoryForm.get('name')?.value);
     formData.append('image', this.selectedImage, this.selectedImage.name);
-    this.newCat = {
-      name: this.categoryForm.value.name,
-      image: this.selectedImage.name,
-    };
-    console.log(this.newCat);
-    this.categorySerivce.addCategory(this.newCat).subscribe({
+    this.categorySerivce.addCategory(formData).subscribe({
       next: (v) => {
         console.log(v);
         Swal.fire(
@@ -50,6 +48,7 @@ export class AddcategoryComponent {
           'You clicked the button!',
           'success'
         );
+        this.categoryAdded.emit(true);
         this.router.navigate(['/category']);
         this.closeDialog()
       },
