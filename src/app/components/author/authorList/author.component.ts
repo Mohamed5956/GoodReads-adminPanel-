@@ -49,6 +49,7 @@ export class AuthorComponent implements OnInit, OnChanges {
         console.log(v);
         Swal.fire('Deleted Succesfully!', 'You clicked the button!', 'success');
         this.router.navigate(['/authors']);
+        window.location.reload();
       },
       error: (e) => {
         console.error(e);

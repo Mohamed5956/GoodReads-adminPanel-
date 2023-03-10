@@ -1,41 +1,38 @@
-
 import { Component } from '@angular/core';
 
 import { MatDialogRef } from '@angular/material/dialog';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 import { Icategory } from 'src/app/models/icategory';
 import { CategoryService } from 'src/app/services/category.service';
-
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryComponent } from '../categoryList/category.component';
 
-
 @Component({
   selector: 'app-addcategory',
   templateUrl: './addcategory.component.html',
-  styleUrls: ['./addcategory.component.css']
+  styleUrls: ['./addcategory.component.css'],
 })
 export class AddcategoryComponent {
-  newCat: Icategory = {}
-  categoryForm: FormGroup
+  newCat: Icategory = {};
+  categoryForm: FormGroup;
   name: boolean = false;
   selectedImage!: File;
   constructor(
     public dialogRef: MatDialogRef<CategoryComponent>,
     private categorySerivce: CategoryService,
     private router: Router,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
-      image: ['']
-    })
+      image: [''],
+    });
   }
   saveData() {
-    var formData: any = new FormData;
+    var formData: any = new FormData();
     formData.append('image', this.selectedImage, this.selectedImage.name);
     this.newCat = {
       name: this.categoryForm.value.name,
@@ -45,21 +42,18 @@ export class AddcategoryComponent {
     this.categorySerivce.addCategory(this.newCat).subscribe({
       next: (v) => {
         console.log(v);
-        Swal.fire(
-          'Added Succesfully!',
-          'You clicked the button!',
-          'success'
-        );
+        Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.router.navigate(['/category']);
-        this.closeDialog()
+        this.closeDialog();
+        window.location.reload();
       },
       error: (e) => {
-        console.error(e)
+        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
-        })
+        });
       },
     });
   }

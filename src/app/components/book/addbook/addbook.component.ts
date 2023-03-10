@@ -42,19 +42,17 @@ export class AddbookComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.catService.getAllCategories().subscribe(cat => {
+    this.catService.getAllCategories().subscribe((cat) => {
       this.categories = cat;
       console.log(this.categories);
-    })
-
-    this.authorService.getAllAuthors().subscribe(author => {
-      this.authors = author;
     });
 
-
+    this.authorService.getAllAuthors().subscribe((author) => {
+      this.authors = author;
+    });
   }
   saveData() {
-    var formData: any = new FormData;
+    var formData: any = new FormData();
     formData.append('image', this.selectedImage, this.selectedImage.name);
     this.newBook = {
       title: this.bookForm.value.title,
@@ -70,6 +68,7 @@ export class AddbookComponent implements OnInit {
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.router.navigate(['/books']);
         this.closeDialog();
+        window.location.reload();
       },
       error: (e: any) => {
         console.error(e);

@@ -32,13 +32,13 @@ export class AddauthorComponent {
   }
 
   saveData() {
-    var formData: any = new FormData;
+    var formData: any = new FormData();
     formData.append('photo', this.selectedImage, this.selectedImage.name);
     this.newAuthor = {
       firstName: this.authorForm.value.firstName,
       lastName: this.authorForm.value.lastName,
       photo: this.selectedImage.name,
-      birthDate: this.authorForm.value.birthDate
+      birthDate: this.authorForm.value.birthDate,
     };
     this.categorySerivce.addAuthor(this.newAuthor).subscribe({
       next: (v) => {
@@ -46,6 +46,7 @@ export class AddauthorComponent {
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.router.navigate(['/authors']);
         this.closeDialog();
+        window.location.reload();
       },
       error: (e) => {
         console.error(e);
