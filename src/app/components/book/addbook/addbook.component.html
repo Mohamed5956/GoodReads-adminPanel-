@@ -31,7 +31,7 @@
       <mat-label>Authors</mat-label>
       <mat-select formControlName="authorId">
         <mat-option *ngFor="let item of authors" [value]="item._id">
-          {{item.firstName }} {{item.lastName}}
+          {{item?.firstName }} {{item?.lastName}}
         </mat-option>
       </mat-select>
     </mat-form-field>
