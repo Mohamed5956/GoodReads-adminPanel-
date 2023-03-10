@@ -22,7 +22,11 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let element">
-      <button class="btn btn-danger" (click)="deleteCategory(element._id)">
+      <button
+        href="#"
+        class="btn btn-danger"
+        (click)="deleteCategory(element._id)"
+      >
         Delete
       </button>
     </td>

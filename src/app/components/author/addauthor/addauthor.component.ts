@@ -46,6 +46,7 @@ export class AddauthorComponent {
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.router.navigate(['/authors']);
         this.closeDialog();
+        window.location.reload();
       },
       error: (e) => {
         console.error(e);

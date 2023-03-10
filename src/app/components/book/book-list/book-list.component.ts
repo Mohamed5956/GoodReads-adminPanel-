@@ -52,6 +52,7 @@ export class BookListComponent implements OnInit, OnChanges {
         console.log(v);
         Swal.fire('Deleted Succesfully!', 'You clicked the button!', 'success');
         this.router.navigate(['/book']);
+        window.location.reload();
       },
       error: (e) => {
         console.error(e);
