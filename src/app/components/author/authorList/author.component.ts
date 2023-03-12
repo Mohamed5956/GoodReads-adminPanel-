@@ -5,6 +5,7 @@ import { Iauthor } from 'src/app/models/iauthor';
 import { AuthorService } from 'src/app/services/author.service';
 import Swal from 'sweetalert2';
 import { AddauthorComponent } from '../addauthor/addauthor.component';
+import { EditauthorComponent } from '../editauthor/editauthor.component';
 
 @Component({
   selector: 'app-author',
@@ -44,6 +45,17 @@ export class AuthorComponent implements OnInit, OnChanges {
       });
     })
   }
+  openEditDialog(id: string) {
+    const dialogRef = this.dialog.open(EditauthorComponent, {
+      width: '400px',
+      data: { authorId: id }
+    });
+    dialogRef.componentInstance.AuthorUpdated.subscribe(() => {
+      this.authorService.getAllAuthors().subscribe((authorList) => {
+        this.authors = authorList
+      });
+    });
+  }
   ngOnChanges() {
     this.openDialog();
   }
@@ -64,5 +76,8 @@ export class AuthorComponent implements OnInit, OnChanges {
         });
       },
     });
+  }
+  updateAuthor(id: string) {
+
   }
 }

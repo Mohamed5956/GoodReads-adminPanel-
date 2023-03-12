@@ -19,7 +19,7 @@ export class BookService {
     };
   }
   getAllBooks(): Observable<Ibook[]> {
-    return this.http.get<Ibook[]>(`${environment.APIBaseURL}/books`);
+    return this.http.get<Ibook[]>(`${environment.APIBaseURL}/books/`);
   }
   addBook(book: Ibook): Observable<Ibook> {
     return this.http.post<Ibook>(

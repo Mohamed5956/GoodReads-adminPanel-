@@ -49,6 +49,7 @@ export class AddbookComponent implements OnInit {
 
     this.authorService.getAllAuthors().subscribe((author) => {
       this.authors = author;
+      console.log(this.authors);
     });
   }
   saveData() {
