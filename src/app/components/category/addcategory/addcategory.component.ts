@@ -18,7 +18,7 @@ import { EventEmitter, Output } from '@angular/core';
   styleUrls: ['./addcategory.component.css'],
 })
 export class AddcategoryComponent {
-  categoryForm: FormGroup
+  categoryForm: FormGroup;
   name: boolean = false;
   selectedImage!: File;
   @Output() categoryAdded = new EventEmitter<boolean>();
@@ -35,17 +35,13 @@ export class AddcategoryComponent {
     });
   }
   saveData() {
-    var formData: any = new FormData;
+    var formData: any = new FormData();
     formData.append('name', this.categoryForm.get('name')?.value);
     formData.append('image', this.selectedImage, this.selectedImage.name);
     this.categorySerivce.addCategory(formData).subscribe({
       next: (v) => {
         console.log(v);
-        Swal.fire(
-          'Added Succesfully!',
-          'You clicked the button!',
-          'success'
-        );
+        Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.categoryAdded.emit(true);
         this.router.navigate(['/category']);
         this.closeDialog();

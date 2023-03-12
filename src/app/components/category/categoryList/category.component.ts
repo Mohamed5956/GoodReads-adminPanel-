@@ -6,6 +6,7 @@ import { AddcategoryComponent } from '../addcategory/addcategory.component';
 import { MatTableModule } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { Route, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category',
@@ -13,7 +14,8 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit, OnChanges {
-  displayedColumns: string[] = ['id', 'name', 'actions'];
+  image = `${environment.APIBaseURL}/assets/uploads/category`;
+  displayedColumns: string[] = ['id', 'image', 'name', 'actions'];
   categories: Icategory[];
   constructor(
     private dialog: MatDialog,
@@ -46,7 +48,7 @@ export class CategoryComponent implements OnInit, OnChanges {
       next: (v) => {
         console.log(v);
         Swal.fire('Deleted Succesfully!', 'You clicked the button!', 'success');
-        this.categories = this.categories.filter(c => c._id !== id);
+        this.categories = this.categories.filter((c) => c._id !== id);
       },
       error: (e) => {
         console.error(e);

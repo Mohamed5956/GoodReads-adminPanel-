@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Ibook } from 'src/app/models/ibook';
 import { MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
@@ -17,7 +17,8 @@ import { Iauthor } from 'src/app/models/iauthor';
   styleUrls: ['./addbook.component.css'],
 })
 export class AddbookComponent implements OnInit {
-  newBook: Ibook = {};
+  @Output() BookAdded = new EventEmitter<boolean>();
+
   bookForm: FormGroup;
   name: boolean = false;
   selectedImage!: File;
@@ -54,21 +55,22 @@ export class AddbookComponent implements OnInit {
   saveData() {
     var formData: any = new FormData();
     formData.append('image', this.selectedImage, this.selectedImage.name);
-    this.newBook = {
-      title: this.bookForm.value.title,
-      description: this.bookForm.value.description,
-      categoryId: this.bookForm.value.categoryId,
-      authorId: this.bookForm.value.authorId,
-      image: this.selectedImage.name,
-    };
-    console.log(this.newBook);
-    this.bookserivce.addBook(this.newBook).subscribe({
+    formData.append('description', this.bookForm.get('description')?.value);
+    formData.append('title', this.bookForm.get('title')?.value);
+    formData.append('categoryId', this.bookForm.get('categoryId')?.value);
+    formData.append('authorId', this.bookForm.get('authorId')?.value);
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+    this.bookserivce.addBook(formData).subscribe({
       next: (v: any) => {
+        console.log(formData);
         console.log(v);
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
+        this.BookAdded.emit(true);
         this.router.navigate(['/books']);
         this.closeDialog();
-        window.location.reload();
+        // window.location.reload();
       },
       error: (e: any) => {
         console.error(e);

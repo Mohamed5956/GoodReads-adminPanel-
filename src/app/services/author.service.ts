@@ -17,7 +17,7 @@ export class AuthorService {
     };
   }
   getAllAuthors(): Observable<Iauthor[]> {
-    return this.http.get<Iauthor[]>(`${environment.APIBaseURL}/authors`);
+    return this.http.get<Iauthor[]>(`${environment.APIBaseURL}/authors/`);
   }
   addAuthor(form: FormData): Observable<Iauthor> {
     return this.http.post<Iauthor>(

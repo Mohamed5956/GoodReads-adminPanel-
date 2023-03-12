@@ -13,13 +13,13 @@ import { AuthorComponent } from '../authorList/author.component';
   styleUrls: ['./addauthor.component.css'],
 })
 export class AddauthorComponent {
-  @Output() AuthorAdded = new EventEmitter<boolean>();
-
   authorForm: FormGroup;
   selectedImage!: File;
+  @Output() AuthorAdded = new EventEmitter<boolean>();
+
   constructor(
     public dialogRef: MatDialogRef<AuthorComponent>,
-    private categorySerivce: AuthorService,
+    private authorSerivce: AuthorService,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -33,17 +33,17 @@ export class AddauthorComponent {
   }
 
   saveData() {
-    var form: any = new FormData;
+    var form: any = new FormData();
     form.append('photo', this.selectedImage, this.selectedImage.name);
-    form.append('birthDate', this.authorForm.get('birthDate')?.value)
-    form.append('firstName', this.authorForm.get('firstName')?.value)
-    form.append('lastName', this.authorForm.get('lastName')?.value)
-    form.append('description', this.authorForm.get('description')?.value)
-    this.categorySerivce.addAuthor(form).subscribe({
+    form.append('birthDate', this.authorForm.get('birthDate')?.value);
+    form.append('firstName', this.authorForm.get('firstName')?.value);
+    form.append('lastName', this.authorForm.get('lastName')?.value);
+    form.append('description', this.authorForm.get('description')?.value);
+    this.authorSerivce.addAuthor(form).subscribe({
       next: (v) => {
         console.log(v);
-        this.AuthorAdded.emit(true);
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
+        this.AuthorAdded.emit(true);
         this.router.navigate(['/authors']);
         this.closeDialog();
         window.location.reload();

@@ -13,22 +13,24 @@ export class BookService {
   constructor(private http: HttpClient) {
     this.httpHeaders = {
       headers: {
-        'Content-Type': 'application/json',
         'x-token': `${localStorage.getItem('token')}`,
       },
     };
   }
   getAllBooks(): Observable<Ibook[]> {
-    return this.http.get<Ibook[]>(`${environment.APIBaseURL}/books`);
+    return this.http.get<Ibook[]>(`${environment.APIBaseURL}/books/`);
   }
-  addBook(book: Ibook): Observable<Ibook> {
+  addBook(formData: FormData): Observable<Ibook> {
     return this.http.post<Ibook>(
       `${environment.APIBaseURL}/books`,
-      JSON.stringify(book),
+      formData,
       this.httpHeaders
     );
   }
   deleteBook(id: string): Observable<Ibook> {
-    return this.http.delete<Ibook>(`${environment.APIBaseURL}/books/${id}`, this.httpHeaders);
+    return this.http.delete<Ibook>(
+      `${environment.APIBaseURL}/books/${id}`,
+      this.httpHeaders
+    );
   }
 }
