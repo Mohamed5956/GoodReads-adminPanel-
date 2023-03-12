@@ -6,6 +6,8 @@ import { AddcategoryComponent } from '../addcategory/addcategory.component';
 import { MatTableModule } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { Route, Router } from '@angular/router';
+import { EditcategoryComponent } from '../editcategory/editcategory.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category',
@@ -13,8 +15,9 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit, OnChanges {
-  displayedColumns: string[] = ['id', 'name', 'actions'];
+  displayedColumns: string[] = ['id', 'image', 'name', 'actions'];
   categories: Icategory[];
+  image = `${environment.APIBaseURL}/assets/uploads/category`;
   constructor(
     private dialog: MatDialog,
     private categoryService: CategoryService,
@@ -32,6 +35,17 @@ export class CategoryComponent implements OnInit, OnChanges {
       width: '400px',
     });
     dialogRef.componentInstance.categoryAdded.subscribe(() => {
+      this.categoryService.getAllCategories().subscribe((catList) => {
+        this.categories = catList;
+      });
+    });
+  }
+  openEditDialog(id: string) {
+    const dialogRef = this.dialog.open(EditcategoryComponent, {
+      width: '400px',
+      data: { categoryId: id }
+    });
+    dialogRef.componentInstance.categoryUpdated.subscribe(() => {
       this.categoryService.getAllCategories().subscribe((catList) => {
         this.categories = catList;
       });

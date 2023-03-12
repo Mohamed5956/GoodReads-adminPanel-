@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Add Category : </h1>
+<div mat-dialog-content>
+  <p>Enter category name</p>
+  <form [formGroup]="categoryForm">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Category:</mat-label>
+      <input matInput type="text" placeholder="Enter category name here..." formControlName="name">
+      <mat-error *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">Category name is
+        required</mat-error>
+    </mat-form-field>
+
+    <input type="file" (change)="onSelectedFile($event)" placeholder="Enter photo here..." formControlName="image">
+    <mat-error *ngIf="categoryForm.get('image')?.invalid && categoryForm.get('image')?.touched">Photo is
+      required</mat-error>
+
+  </form>
+  <div mat-dialog-actions>
+
+    <button mat-button class="btn btn-light border me-2" [disabled]="categoryForm.invalid"
+      (click)="saveData()">Save</button>
+    <button mat-button class="btn btn-light border" (click)="closeDialog()">Cancel</button>
+  </div>
+</div>

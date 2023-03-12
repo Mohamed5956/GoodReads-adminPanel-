@@ -21,6 +21,9 @@ export class CategoryService {
   getAllCategories(): Observable<Icategory[]> {
     return this.http.get<Icategory[]>(`${environment.APIBaseURL}/categories`);
   }
+  getCategoryById(id: string): Observable<Icategory> {
+    return this.http.get<Icategory>(`${environment.APIBaseURL}/categories/${id}`);
+  }
   addCategory(form: FormData): Observable<Icategory> {
     return this.http.post<Icategory>(
       `${environment.APIBaseURL}/categories`,
@@ -33,5 +36,8 @@ export class CategoryService {
       `${environment.APIBaseURL}/categories/${id}`,
       this.httpHeaders
     );
+  }
+  updateCategory(id: string, form: FormData) {
+    return this.http.patch<Icategory>(`${environment.APIBaseURL}/categories/${id}`, form, this.httpHeaders)
   }
 }
