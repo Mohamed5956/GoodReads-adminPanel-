@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Iauthor } from 'src/app/models/iauthor';
 import { AuthorService } from 'src/app/services/author.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { AddauthorComponent } from '../addauthor/addauthor.component';
 import { EditauthorComponent } from '../editauthor/editauthor.component';
@@ -22,6 +23,7 @@ export class AuthorComponent implements OnInit, OnChanges {
     'description',
     'actions',
   ];
+  image = `${environment.APIBaseURL}/assets/uploads/author`;
   authors: Iauthor[];
   constructor(
     private dialog: MatDialog,

@@ -11,7 +11,9 @@
   <!-- photo Column -->
   <ng-container matColumnDef="photo">
     <th mat-header-cell *matHeaderCellDef>Photo</th>
-    <td mat-cell *matCellDef="let element">{{ element.photo }}</td>
+    <td mat-cell *matCellDef="let element">
+      <img [src]="image + '/' + element.photo" width="50px" />
+    </td>
   </ng-container>
 
   <!-- FName Column -->

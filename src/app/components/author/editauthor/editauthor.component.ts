@@ -45,7 +45,7 @@ export class EditauthorComponent {
         firstName: author.firstName,
         lastName: author.lastName,
         description: author.description,
-        birthDate: author.birthDate?.getDate,
+        birthDate: author.birthDate,
         photo: author.photo
       })
     })
@@ -57,14 +57,15 @@ export class EditauthorComponent {
     form.append('firstName', this.authorForm.get('firstName')?.value)
     form.append('lastName', this.authorForm.get('lastName')?.value)
     form.append('description', this.authorForm.get('description')?.value)
+    for (const [key, value] of form.entries()) {
+      console.log(`${key}: ${value}`);
+    }
     this.authorService.updateAuthor(this.authorId, form).subscribe({
       next: (v) => {
-        console.log(v);
         this.AuthorUpdated.emit(true);
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.router.navigate(['/authors']);
         this.closeDialog();
-        window.location.reload();
       },
       error: (e) => {
         console.error(e);
