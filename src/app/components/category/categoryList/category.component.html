@@ -1,8 +1,4 @@
-<button
-  class="btn btn-primary float-end m-3"
-  mat-raised-button
-  (click)="openDialog()"
->
+<button class="btn btn-primary float-end m-3" mat-raised-button (click)="openDialog()">
   Add Category
 </button>
 <table mat-table [dataSource]="categories" class="mat-elevation-z8 demo-table">
@@ -28,16 +24,25 @@
     <td mat-cell *matCellDef="let element">{{ element.name }}</td>
   </ng-container>
 
+  <!-- photo Column -->
+  <ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef>Photo</th>
+    <td mat-cell *matCellDef="let element">
+      <img [src]="image + '/' + element.image" />
+
+    </td>
+  </ng-container>
+
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let element">
-      <button
-        href="#"
-        class="btn btn-danger"
-        (click)="deleteCategory(element._id)"
-      >
+      <button href="#" class="btn btn-danger" (click)="deleteCategory(element._id)">
         Delete
+      </button>
+
+      <button href="#" class="btn btn-warning float-end" mat-raised-button (click)=" openEditDialog(element._id)">
+        Update
       </button>
     </td>
   </ng-container>

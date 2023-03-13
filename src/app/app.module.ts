@@ -38,6 +38,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { EditcategoryComponent } from './components/category/editcategory/editcategory.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     LoginComponent,
     MainComponent,
     NotFoundComponent,
+    EditcategoryComponent,
   ],
   imports: [
     BrowserModule,
