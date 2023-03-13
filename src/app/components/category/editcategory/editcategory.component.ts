@@ -47,9 +47,6 @@ export class EditcategoryComponent {
   saveData() {
     console.log(this.categoryForm.get('name')?.value);
     console.log(this.categoryId);
-    if (!this.categoryForm || !this.category) {
-      return;
-    }
     var form: any = new FormData;
     form.append('name', this.categoryForm.get('name')?.value);
     form.append('image', this.selectedImage, this.selectedImage.name);
@@ -64,13 +61,14 @@ export class EditcategoryComponent {
         this.categoryUpdated.emit(true);
         this.router.navigate(['/category']);
         this.closeDialog();
+        window.location.reload();
       },
       error: (e) => {
         console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Please contact backend admin', // log the error message from the server
+          text: 'Please contact the backend Admin', // log the error message from the server
         });
       },
     });

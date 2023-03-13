@@ -17,7 +17,10 @@ export class AuthorService {
     };
   }
   getAllAuthors(): Observable<Iauthor[]> {
-    return this.http.get<Iauthor[]>(`${environment.APIBaseURL}/authors/`);
+    return this.http.get<Iauthor[]>(`${environment.APIBaseURL}/authors/`, { headers: { 'Content-Type': 'application/json' } });
+  }
+  getAuthorById(id: string): Observable<Iauthor> {
+    return this.http.get<Iauthor>(`${environment.APIBaseURL}/authors/${id}`);
   }
   addAuthor(form: FormData): Observable<Iauthor> {
     return this.http.post<Iauthor>(
@@ -25,6 +28,9 @@ export class AuthorService {
       form,
       this.httpHeaders
     );
+  }
+  updateAuthor(id: string, form: FormData): Observable<Iauthor> {
+    return this.http.patch<Iauthor>(`${environment.APIBaseURL}/authors/${id}`, form, this.httpHeaders);
   }
   deleteAuthor(id: string): Observable<Iauthor> {
     return this.http.delete<Iauthor>(
