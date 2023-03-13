@@ -2,7 +2,7 @@ export interface Iauthor {
   _id?: string;
   firstName?: string;
   lastName?: string;
-  birthDate?: Date;
+  birthDate?: string;
   photo?: string;
   description?: string;
 }
