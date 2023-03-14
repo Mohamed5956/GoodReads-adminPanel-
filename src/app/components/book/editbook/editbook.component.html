@@ -1,28 +1,43 @@
-<h1 mat-dialog-title>Add Book :</h1>
+<h1 mat-dialog-title>Update Book :</h1>
 <div mat-dialog-content>
   <p>Enter Book name</p>
   <form [formGroup]="bookForm">
     <mat-form-field appearance="fill">
       <mat-label>Book:</mat-label>
-      <input matInput type="text" placeholder="Enter book title here..." formControlName="title" />
-      <mat-error *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched">Book title is
-        required</mat-error>
+      <input
+        matInput
+        type="text"
+        placeholder="Enter book title here..."
+        formControlName="title"
+      />
+      <mat-error
+        *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched"
+        >Book title is required</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>description:</mat-label>
-      <input matInput type="text" placeholder="Enter book description here..." formControlName="description" />
-      <mat-error *ngIf="
+      <input
+        matInput
+        type="text"
+        placeholder="Enter book description here..."
+        formControlName="description"
+      />
+      <mat-error
+        *ngIf="
           bookForm.get('description')?.invalid &&
           bookForm.get('description')?.touched
-        ">Book description is required</mat-error>
+        "
+        >Book description is required</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Categories</mat-label>
       <mat-select formControlName="categoryId">
         <mat-option *ngFor="let item of categories" [value]="item._id">
-          {{item.name}}
+          {{ item.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -31,14 +46,21 @@
       <mat-label>Authors</mat-label>
       <mat-select formControlName="authorId">
         <mat-option *ngFor="let item of authors" [value]="item._id">
-          {{item?.firstName }} {{item?.lastName}}
+          {{ item?.firstName }} {{ item?.lastName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <input type="file" (change)="onSelectedFile($event)" placeholder="Enter photo here..." formControlName="image">
-    <mat-error *ngIf="bookForm.get('image')?.invalid && bookForm.get('image')?.touched">Photo is
-      required</mat-error>
+    <input
+      type="file"
+      (change)="onSelectedFile($event)"
+      placeholder="Enter photo here..."
+      formControlName="image"
+    />
+    <mat-error
+      *ngIf="bookForm.get('image')?.invalid && bookForm.get('image')?.touched"
+      >Photo is required</mat-error
+    >
   </form>
   <div mat-dialog-actions>
     <button mat-button class="btn btn-light border me-2" (click)="saveData()">
