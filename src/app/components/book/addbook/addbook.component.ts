@@ -55,21 +55,16 @@ export class AddbookComponent implements OnInit {
   saveData() {
     var formData: any = new FormData();
     formData.append('image', this.selectedImage, this.selectedImage.name);
-    this.newBook = {
-      title: this.bookForm.value.title,
-      description: this.bookForm.value.description,
-      categoryId: this.bookForm.value.categoryId,
-      authorId: this.bookForm.value.authorId,
-      image: this.selectedImage.name,
-    };
-    console.log(this.newBook);
-    this.bookserivce.addBook(this.newBook).subscribe({
+    formData.append('title', this.bookForm.get('title')?.value);
+    formData.append('description', this.bookForm.get('description')?.value);
+    formData.append('authorId', this.bookForm.get('authorId')?.value);
+    formData.append('categoryId', this.bookForm.get('categoryId')?.value);
+    this.bookserivce.addBook(formData).subscribe({
       next: (v: any) => {
         console.log(v);
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.router.navigate(['/books']);
         this.closeDialog();
-        window.location.reload();
       },
       error: (e: any) => {
         console.error(e);

@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BookService } from 'src/app/services/book.service';
 import { MatTableModule } from '@angular/material/table';
 import { Route, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-book-list',
@@ -13,6 +14,7 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./book-list.component.css'],
 })
 export class BookListComponent implements OnInit, OnChanges {
+  image = `${environment.APIBaseURL}/assets/uploads/book`
   displayedColumns: string[] = [
     'id',
     'title',

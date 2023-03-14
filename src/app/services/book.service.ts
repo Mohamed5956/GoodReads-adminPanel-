@@ -13,7 +13,6 @@ export class BookService {
   constructor(private http: HttpClient) {
     this.httpHeaders = {
       headers: {
-        'Content-Type': 'application/json',
         'x-token': `${localStorage.getItem('token')}`,
       },
     };
@@ -21,10 +20,10 @@ export class BookService {
   getAllBooks(): Observable<Ibook[]> {
     return this.http.get<Ibook[]>(`${environment.APIBaseURL}/books/`);
   }
-  addBook(book: Ibook): Observable<Ibook> {
+  addBook(form: FormData): Observable<Ibook> {
     return this.http.post<Ibook>(
       `${environment.APIBaseURL}/books`,
-      JSON.stringify(book),
+      form,
       this.httpHeaders
     );
   }
