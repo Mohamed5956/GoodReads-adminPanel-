@@ -20,6 +20,9 @@ export class BookService {
   getAllBooks(): Observable<Ibook[]> {
     return this.http.get<Ibook[]>(`${environment.APIBaseURL}/books/`);
   }
+  getBookById(id: string): Observable<Ibook> {
+    return this.http.get<Ibook>(`${environment.APIBaseURL}/books/${id}`);
+  }
   addBook(form: FormData): Observable<Ibook> {
     return this.http.post<Ibook>(
       `${environment.APIBaseURL}/books`,
@@ -28,6 +31,12 @@ export class BookService {
     );
   }
   deleteBook(id: string): Observable<Ibook> {
-    return this.http.delete<Ibook>(`${environment.APIBaseURL}/books/${id}`, this.httpHeaders);
+    return this.http.delete<Ibook>(
+      `${environment.APIBaseURL}/books/${id}`,
+      this.httpHeaders
+    );
+  }
+  updateBook(id: string, form: FormData) {
+    return this.http.patch<Ibook>(`${environment.APIBaseURL}/books/${id}`, form, this.httpHeaders)
   }
 }

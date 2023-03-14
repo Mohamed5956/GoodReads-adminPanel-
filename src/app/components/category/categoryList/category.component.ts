@@ -60,7 +60,7 @@ export class CategoryComponent implements OnInit, OnChanges {
       next: (v) => {
         console.log(v);
         Swal.fire('Deleted Succesfully!', 'You clicked the button!', 'success');
-        this.categories = this.categories.filter(c => c._id !== id);
+        this.categories = this.categories.filter((c) => c._id !== id);
       },
       error: (e) => {
         console.error(e);

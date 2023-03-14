@@ -7,6 +7,7 @@ import { BookService } from 'src/app/services/book.service';
 import { MatTableModule } from '@angular/material/table';
 import { Route, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { EditbookComponent } from '../editbook/editbook.component';
 
 @Component({
   selector: 'app-book-list',
@@ -43,7 +44,17 @@ export class BookListComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(AddbookComponent, {
       width: '400px',
     });
+    dialogRef.componentInstance.BookAdded.subscribe(() => {
+      this.bookservice.getAllBooks().subscribe((bookList) => {
+        this.books = bookList;
+      });
+    });
   }
+  openEditDialog(id: string) {
+    const dialogRef = this.dialog.open(EditbookComponent, {
+      width: '400px',
+      data: { bookId: id }
+    });}
   ngOnChanges() {
     this.openDialog();
   }

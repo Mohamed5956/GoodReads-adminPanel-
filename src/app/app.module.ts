@@ -40,6 +40,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EditcategoryComponent } from './components/category/editcategory/editcategory.component';
 import { EditauthorComponent } from './components/author/editauthor/editauthor.component';
+import { EditbookComponent } from './components/book/editbook/editbook.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { EditauthorComponent } from './components/author/editauthor/editauthor.c
     NotFoundComponent,
     EditcategoryComponent,
     EditauthorComponent,
+    EditbookComponent,
   ],
   imports: [
     BrowserModule,

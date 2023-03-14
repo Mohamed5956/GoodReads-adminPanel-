@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Ibook } from 'src/app/models/ibook';
 import { MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
@@ -17,7 +17,8 @@ import { Iauthor } from 'src/app/models/iauthor';
   styleUrls: ['./addbook.component.css'],
 })
 export class AddbookComponent implements OnInit {
-  newBook: Ibook = {};
+  @Output() BookAdded = new EventEmitter<boolean>();
+
   bookForm: FormGroup;
   name: boolean = false;
   selectedImage!: File;
@@ -61,10 +62,13 @@ export class AddbookComponent implements OnInit {
     formData.append('categoryId', this.bookForm.get('categoryId')?.value);
     this.bookserivce.addBook(formData).subscribe({
       next: (v: any) => {
+        console.log(formData);
         console.log(v);
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
+        this.BookAdded.emit(true);
         this.router.navigate(['/books']);
         this.closeDialog();
+        window.location.reload();
       },
       error: (e: any) => {
         console.error(e);
