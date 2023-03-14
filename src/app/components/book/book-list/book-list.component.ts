@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { BookService } from 'src/app/services/book.service';
 import { MatTableModule } from '@angular/material/table';
 import { Route, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { EditbookComponent } from '../editbook/editbook.component';
 
 @Component({
   selector: 'app-book-list',
@@ -13,6 +15,7 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./book-list.component.css'],
 })
 export class BookListComponent implements OnInit, OnChanges {
+  image = `${environment.APIBaseURL}/assets/uploads/book`
   displayedColumns: string[] = [
     'id',
     'title',
@@ -41,7 +44,17 @@ export class BookListComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(AddbookComponent, {
       width: '400px',
     });
+    dialogRef.componentInstance.BookAdded.subscribe(() => {
+      this.bookservice.getAllBooks().subscribe((bookList) => {
+        this.books = bookList;
+      });
+    });
   }
+  openEditDialog(id: string) {
+    const dialogRef = this.dialog.open(EditbookComponent, {
+      width: '400px',
+      data: { bookId: id }
+    });}
   ngOnChanges() {
     this.openDialog();
   }

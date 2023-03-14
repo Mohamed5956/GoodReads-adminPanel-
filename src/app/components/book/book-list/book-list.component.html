@@ -1,8 +1,4 @@
-<button
-  class="btn btn-primary float-end m-3"
-  mat-raised-button
-  (click)="openDialog()"
->
+<button class="btn btn-primary float-end m-3" mat-raised-button (click)="openDialog()">
   Add Book
 </button>
 <ng-container *ngIf="books.length > 0; else noData">
@@ -28,7 +24,9 @@
     <!-- image Column -->
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef>Image</th>
-      <td mat-cell *matCellDef="let element">{{ element?.image }}</td>
+      <td mat-cell *matCellDef="let element">
+        <img [src]="image + '/' + element.image" width="50px" />
+      </td>
     </ng-container>
     <!-- authorid Column -->
     <ng-container matColumnDef="authorId">
@@ -56,6 +54,9 @@
       <td mat-cell *matCellDef="let element">
         <button class="btn btn-danger" (click)="deleteBook(element._id)">
           Delete
+        </button>
+        <button class="btn btn-warning me-2" (click)=" openEditDialog(element._id)">
+          Update
         </button>
       </td>
     </ng-container>

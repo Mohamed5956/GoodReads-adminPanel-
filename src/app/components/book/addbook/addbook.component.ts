@@ -56,13 +56,10 @@ export class AddbookComponent implements OnInit {
   saveData() {
     var formData: any = new FormData();
     formData.append('image', this.selectedImage, this.selectedImage.name);
-    formData.append('description', this.bookForm.get('description')?.value);
     formData.append('title', this.bookForm.get('title')?.value);
-    formData.append('categoryId', this.bookForm.get('categoryId')?.value);
+    formData.append('description', this.bookForm.get('description')?.value);
     formData.append('authorId', this.bookForm.get('authorId')?.value);
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
+    formData.append('categoryId', this.bookForm.get('categoryId')?.value);
     this.bookserivce.addBook(formData).subscribe({
       next: (v: any) => {
         console.log(formData);
@@ -71,7 +68,7 @@ export class AddbookComponent implements OnInit {
         this.BookAdded.emit(true);
         this.router.navigate(['/books']);
         this.closeDialog();
-        // window.location.reload();
+        window.location.reload();
       },
       error: (e: any) => {
         console.error(e);
