@@ -15,15 +15,7 @@ export class AuthService {
   ) {
     this.isLoggedSubject = new BehaviorSubject<boolean>(false);
   }
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    let token = req.clone(
-      {
-        setHeaders: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-    return next.handle(token);
-  }
+
 
   login(data: Iuser): Observable<Iuser> {
     return this.http.post<Iuser>(`${environment.APIBaseURL}/login`, data);

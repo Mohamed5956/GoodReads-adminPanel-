@@ -45,7 +45,7 @@ export class EditauthorComponent {
         firstName: author.firstName,
         lastName: author.lastName,
         description: author.description,
-        birthDate: author.birthDate,
+        birthDate: new Date(`${author.birthDate}`).toLocaleDateString(),
         photo: author.photo
       })
     })
