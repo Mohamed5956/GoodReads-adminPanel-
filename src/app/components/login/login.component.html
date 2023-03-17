@@ -1,4 +1,4 @@
-<main class="main-content  mt-5">
+<!-- <main class="main-content  mt-5">
   <div class="page-header align-items-start min-vh-100">
     <div class="container my-auto">
       <div class="row">
@@ -40,4 +40,43 @@
           </div>
         </div>
       </div>
+    </div> -->
+
+
+<div class="wrapper">
+  <div class="logo">
+    <img src="../../../assets/logo.png" alt="">
+  </div>
+  <div class="text-center mt-4 name">
+    Good Reads
+  </div>
+  <form class="p-3 mt-3" [formGroup]="formGroup" (ngSubmit)="login()">
+    <ng-container *ngIf="vaild_login==0">
+      <div class="alert alert-danger">
+        Invaild Email Or Password
+      </div>
+    </ng-container>
+    <div class="form-field d-flex align-items-center">
+      <span class="far fa-user"></span>
+      <input type="email" name="email" id="email" placeholder="example@gmail.com" formControlName="email" required>
     </div>
+    <div class="">
+      <span class="text-danger px-auto" *ngIf="formGroup.get('email')?.invalid && formGroup.get('email')?.touched">
+        *Email is required
+      </span>
+    </div>
+    <div class="form-field d-flex align-items-center">
+      <span class="fas fa-key"></span>
+      <input type="password" name="password" id="pwd" placeholder="Password" formControlName="password" required>
+      <div>
+        <span class="text-danger" *ngIf="formGroup.get('password')?.invalid && formGroup.get('password')?.touched">
+          *password is required
+        </span>
+      </div>
+    </div>
+    <button class="btn mt-3" type="submit">Login</button>
+  </form>
+  <!-- <div class="text-center fs-6">
+    <a href="#">Forget password?</a> or <a href="#">Sign up</a>
+  </div> -->
+</div>

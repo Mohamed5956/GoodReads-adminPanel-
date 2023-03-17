@@ -33,6 +33,8 @@ export class LoginComponent {
               localStorage.setItem('token', data.token!);
               localStorage.setItem("email", data.email!);
               localStorage.setItem("isAdmin", data.isAdmin!.toString());
+              localStorage.setItem('name', data.firstname!)
+              localStorage.setItem('image', data.image!)
               this.router.navigate(['/home']);
             } else {
 
