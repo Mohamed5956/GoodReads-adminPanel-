@@ -65,6 +65,8 @@ export class BookListComponent implements OnInit, OnChanges {
       next: (v) => {
         console.log(v);
         Swal.fire('Deleted Succesfully!', 'You clicked the button!', 'success');
+        this.books = this.books.filter((b) => b._id !== id);
+
         this.router.navigate(['/books']);
       },
       error: (e) => {

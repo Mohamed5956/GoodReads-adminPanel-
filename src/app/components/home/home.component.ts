@@ -8,14 +8,10 @@ import { CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  categories: Array<Icategory>
   constructor(private categoryService: CategoryService) {
-    this.categories = [];
   }
   ngOnInit() {
-    this.categoryService.getAllCategories().subscribe(cat => {
-      console.log(cat);
-    });
+
   }
 
 }

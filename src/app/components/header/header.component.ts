@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent {
   @Output() toggleSide = new EventEmitter();
+  image = `${environment.APIBaseURL}/assets/uploads/user/${localStorage.getItem('image')}`;
+  userName = localStorage.getItem('name');
   constructor(
     private authService: AuthService,
     private route: Router
