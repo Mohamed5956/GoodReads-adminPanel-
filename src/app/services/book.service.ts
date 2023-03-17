@@ -17,6 +17,10 @@ export class BookService {
       },
     };
   }
+
+  // return this.Http.get<any>(`${environment.baseUrl}/home/all/page/1/`/*userid*/, {
+  //  headers : new HttpHeaders().set('Authorization', 'secrt token')
+  // })
   getAllBooks(): Observable<Ibook[]> {
     return this.http.get<Ibook[]>(`${environment.APIBaseURL}/books/`);
   }
@@ -37,6 +41,10 @@ export class BookService {
     );
   }
   updateBook(id: string, form: FormData) {
-    return this.http.patch<Ibook>(`${environment.APIBaseURL}/books/${id}`, form, this.httpHeaders)
+    return this.http.patch<Ibook>(
+      `${environment.APIBaseURL}/books/${id}`,
+      form,
+      this.httpHeaders
+    );
   }
 }

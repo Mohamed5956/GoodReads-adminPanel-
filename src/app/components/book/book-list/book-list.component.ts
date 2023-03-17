@@ -30,7 +30,8 @@ export class BookListComponent implements OnInit, OnChanges {
   constructor(
     private dialog: MatDialog,
     private bookservice: BookService,
-    private router: Router
+    private router: Router,
+    // private pages: Number
   ) {
     this.books = [];
   }
@@ -75,5 +76,25 @@ export class BookListComponent implements OnInit, OnChanges {
         });
       },
     });
+  }
+
+pageSize= 2;
+currentPage= 1;
+get totalPages(): number {
+    return Math.ceil(this.books.length / this.pageSize);
+  }
+
+  get pagedAuthors(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.books.slice(startIndex, endIndex);
+  }
+
+  prevPage(): void {
+    this.currentPage--;
+  }
+
+  nextPage(): void {
+    this.currentPage++;
   }
 }
