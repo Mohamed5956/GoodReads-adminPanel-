@@ -68,11 +68,11 @@
     <div class="form-field d-flex align-items-center">
       <span class="fas fa-key"></span>
       <input type="password" name="password" id="pwd" placeholder="Password" formControlName="password" required>
-      <div>
-        <span class="text-danger" *ngIf="formGroup.get('password')?.invalid && formGroup.get('password')?.touched">
-          *password is required
-        </span>
-      </div>
+    </div>
+    <div>
+      <span class="text-danger" *ngIf="formGroup.get('password')?.invalid && formGroup.get('password')?.touched">
+        *password is required
+      </span>
     </div>
     <button class="btn mt-3" type="submit">Login</button>
   </form>

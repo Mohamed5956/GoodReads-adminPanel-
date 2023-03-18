@@ -42,6 +42,8 @@ import { EditcategoryComponent } from './components/category/editcategory/editca
 import { EditauthorComponent } from './components/author/editauthor/editauthor.component';
 import { EditbookComponent } from './components/book/editbook/editbook.component';
 
+import { DatePipe } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +86,7 @@ import { EditbookComponent } from './components/book/editbook/editbook.component
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

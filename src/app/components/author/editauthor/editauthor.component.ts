@@ -1,9 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Output, Inject, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Iauthor } from 'src/app/models/iauthor';
 import { AuthorService } from 'src/app/services/author.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { AuthorComponent } from '../authorList/author.component';
 
@@ -18,12 +20,14 @@ export class EditauthorComponent {
   author: Iauthor
   authorForm: FormGroup;
   selectedImage!: File;
+  oldPhoto!: File;
   constructor(
     public dialogRef: MatDialogRef<AuthorComponent>,
     private authorService: AuthorService,
     private router: Router,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { authorId: string }
+    @Inject(MAT_DIALOG_DATA) public data: { authorId: string },
+    private datePipe: DatePipe
 
   ) {
 
@@ -33,7 +37,7 @@ export class EditauthorComponent {
     this.authorForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      photo: ['', Validators.required],
+      photo: [],
       birthDate: ['', Validators.required],
       description: ['', Validators.required],
     });
@@ -41,18 +45,23 @@ export class EditauthorComponent {
   ngOnInit(): void {
     this.authorService.getAuthorById(this.authorId).subscribe(author => {
       this.author = author;
+      const formattedDate = this.datePipe.transform(author.birthDate, 'yyyy-MM-dd');
       this.authorForm.patchValue({
         firstName: author.firstName,
         lastName: author.lastName,
         description: author.description,
-        birthDate: new Date(`${author.birthDate}`).toLocaleDateString(),
-        photo: author.photo
+        birthDate: formattedDate,
       })
     })
   }
   saveData() {
     var form: any = new FormData;
-    form.append('photo', this.selectedImage, this.selectedImage.name);
+    const authorImage = this.selectedImage;
+    if (authorImage) {
+      form.append('photo', authorImage, authorImage?.name);
+    } else {
+      form.append('photo', this.author.photo);
+    }
     form.append('birthDate', this.authorForm.get('birthDate')?.value)
     form.append('firstName', this.authorForm.get('firstName')?.value)
     form.append('lastName', this.authorForm.get('lastName')?.value)

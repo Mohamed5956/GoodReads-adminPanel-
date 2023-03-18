@@ -3,10 +3,10 @@
     <h1>Category List</h1>
   </div>
 
-  <button class="btn btn-primary float-end m-3" mat-raised-button (click)="openDialog()">
+  <button class="btn add float-end m-3" mat-raised-button (click)="openDialog()">
     Add Category
   </button>
-  <table mat-table [dataSource]="categories" class="mat-elevation-z8 demo-table">
+  <table mat-table [dataSource]="categories" class="mat-elevation-z8 demo-table ">
     <!-- Position Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID.</th>

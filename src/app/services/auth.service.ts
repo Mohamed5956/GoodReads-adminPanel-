@@ -30,6 +30,8 @@ export class AuthService {
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
+    localStorage.removeItem('name');
+    localStorage.removeItem('image')
     localStorage.removeItem('isAdmin');
     this.isLoggedSubject.next(false);
   }
