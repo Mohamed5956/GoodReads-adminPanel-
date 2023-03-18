@@ -20,7 +20,6 @@ export class EditauthorComponent {
   author: Iauthor
   authorForm: FormGroup;
   selectedImage!: File;
-  oldPhoto!: File;
   constructor(
     public dialogRef: MatDialogRef<AuthorComponent>,
     private authorService: AuthorService,
