@@ -6,7 +6,7 @@
     Add Book
   </button>
   <ng-container *ngIf="books.length > 0; else noData">
-    <table mat-table [dataSource]="books" class="mat-elevation-z8 demo-table">
+    <table mat-table [dataSource]="paginated" class="mat-elevation-z8 demo-table">
       <!-- Position Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID.</th>

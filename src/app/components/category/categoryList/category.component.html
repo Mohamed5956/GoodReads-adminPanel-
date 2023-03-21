@@ -6,7 +6,7 @@
   <button class="btn add float-end m-3" mat-raised-button (click)="openDialog()">
     Add Category
   </button>
-  <table mat-table [dataSource]="categories" class="mat-elevation-z8 demo-table ">
+  <table mat-table [dataSource]="paginated" class="mat-elevation-z8 demo-table ">
     <!-- Position Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID.</th>
@@ -45,4 +45,24 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <br><br><br>
+<nav aria-label="Categories Pagination" class="w-100" style="display: flex;justify-content:center;align-items:center;">
+  <ul class="pagination d-flex justify-content-center w-100" *ngIf="categories && categories.length > 0">
+    <li class="page-item" [class.disabled]="currentPage == 1">
+      <a class="page-link" (click)="prevPage()" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li *ngFor="let page of pages" class="page-item" [class.active]="currentPage==page">
+      <a class="page-link " (click)="setPage(page)">{{page}}</a>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage == totalPages">
+      <a class="page-link" (click)="nextPage()" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 </div>

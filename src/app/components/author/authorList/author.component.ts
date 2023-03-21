@@ -25,16 +25,30 @@ export class AuthorComponent implements OnInit, OnChanges {
   ];
   image = `${environment.APIBaseURL}/assets/uploads/author`;
   authors: Iauthor[];
+  paginated!: any[];
+  currentPage!: number;
+  pageSize!: number;
+  totalPages!: number;
+  pages: number[] = [];
+  count: number = 0;
   constructor(
     private dialog: MatDialog,
     private authorService: AuthorService,
     private router: Router
   ) {
     this.authors = [];
+    this.currentPage = 1;
+    this.pageSize = 2;
+    this.totalPages = 5;
+    this.pages = [];
+    this.paginated = [];
   }
   ngOnInit() {
     this.authorService.getAllAuthors().subscribe((authList) => {
       this.authors = authList;
+      this.calculatePages();
+      this.paginated = this.authors.slice(this.count, this.pageSize);
+      console.log(this.authors);
     });
   }
   openDialog() {
@@ -81,5 +95,41 @@ export class AuthorComponent implements OnInit, OnChanges {
   }
   updateAuthor(id: string) {
 
+  }
+  calculatePages() {
+    this.totalPages = Math.ceil(this.authors.length / this.pageSize);
+
+    console.log(this.totalPages);
+    this.pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      this.pages.push(i);
+    }
+  }
+
+  setPage(page: number) {
+    this.currentPage = page;
+    // this.paginated = this.books.slice(this.count,this.pageSize);
+    console.log(page)
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+    // console.log('next');
+
+    this.count += 2;
+    this.pageSize += 2;
+    this.paginated=this.authors.slice(this.count,this.pageSize)
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+    console.log('prev');
+    this.count -= 2;
+    this.pageSize -= 2;
+    this.paginated = this.authors.slice(this.count,this.pageSize);
   }
 }

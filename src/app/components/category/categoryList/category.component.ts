@@ -17,6 +17,12 @@ import { environment } from 'src/environments/environment';
 export class CategoryComponent implements OnInit, OnChanges {
   displayedColumns: string[] = ['id', 'image', 'name', 'actions'];
   categories: Icategory[];
+  paginated!: any[];
+  currentPage!: number;
+  pageSize!: number;
+  totalPages!: number;
+  pages: number[] = [];
+  count: number = 0;
   image = `${environment.APIBaseURL}/assets/uploads/category`;
   constructor(
     private dialog: MatDialog,
@@ -24,10 +30,18 @@ export class CategoryComponent implements OnInit, OnChanges {
     private router: Router
   ) {
     this.categories = [];
+    this.currentPage = 1;
+    this.pageSize = 2;
+    this.totalPages = 5;
+    this.pages = [];
+    this.paginated = [];
   }
   ngOnInit() {
     this.categoryService.getAllCategories().subscribe((catList) => {
       this.categories = catList;
+      this.calculatePages();
+      this.paginated = this.categories.slice(this.count, this.pageSize);
+      console.log(this.categories);
     });
   }
   openDialog() {
@@ -71,5 +85,41 @@ export class CategoryComponent implements OnInit, OnChanges {
         });
       },
     });
+  }
+  calculatePages() {
+    this.totalPages = Math.ceil(this.categories.length / this.pageSize);
+
+    console.log(this.totalPages);
+    this.pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      this.pages.push(i);
+    }
+  }
+
+  setPage(page: number) {
+    this.currentPage = page;
+    // this.paginated = this.books.slice(this.count,this.pageSize);
+    console.log(page)
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+    // console.log('next');
+
+    this.count += 2;
+    this.pageSize += 2;
+    this.paginated=this.categories.slice(this.count,this.pageSize)
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+    console.log('prev');
+    this.count -= 2;
+    this.pageSize -= 2;
+    this.paginated = this.categories.slice(this.count,this.pageSize);
   }
 }
