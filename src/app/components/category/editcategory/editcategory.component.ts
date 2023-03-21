@@ -19,7 +19,6 @@ export class EditcategoryComponent {
   category: Icategory
   @Input() categoryId: string;
   @Output() categoryUpdated = new EventEmitter<boolean>();
-
   constructor(
     public dialogRef: MatDialogRef<CategoryComponent>,
     private categorySerivce: CategoryService,
@@ -31,7 +30,7 @@ export class EditcategoryComponent {
   ) {
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
-      image: ['', Validators.required],
+      image: [''],
     });
     this.categoryId = this.data.categoryId;
     this.category = {}
@@ -45,11 +44,16 @@ export class EditcategoryComponent {
     });
   }
   saveData() {
+    const categoryImage = this.selectedImage;
     console.log(this.categoryForm.get('name')?.value);
     console.log(this.categoryId);
     var form: any = new FormData;
     form.append('name', this.categoryForm.get('name')?.value);
-    form.append('image', this.selectedImage, this.selectedImage.name);
+    if (categoryImage) {
+      form.append('image', categoryImage, categoryImage?.name);
+    } else {
+      form.append('image', this.category.image);
+    }
     this.categorySerivce.updateCategory(this.categoryId, form).subscribe({
       next: (v) => {
         console.log(v);
@@ -61,7 +65,6 @@ export class EditcategoryComponent {
         this.categoryUpdated.emit(true);
         this.router.navigate(['/category']);
         this.closeDialog();
-        window.location.reload();
       },
       error: (e) => {
         console.error(e);

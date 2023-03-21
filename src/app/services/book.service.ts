@@ -29,7 +29,7 @@ export class BookService {
   }
   addBook(form: FormData): Observable<Ibook> {
     return this.http.post<Ibook>(
-      `${environment.APIBaseURL}/books`,
+      `${environment.APIBaseURL}/books/`,
       form,
       this.httpHeaders
     );

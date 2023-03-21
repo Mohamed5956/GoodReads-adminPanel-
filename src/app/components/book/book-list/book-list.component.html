@@ -2,87 +2,92 @@
   <div class="pageBox p-3 mt-2">
     <h1>Book List</h1>
   </div>
-<button class="btn btn-primary float-end m-3" mat-raised-button (click)="openDialog()">
-  Add Book
-</button>
-<ng-container *ngIf="books.length > 0; else noData">
-  <table mat-table [dataSource]="books" class="mat-elevation-z8 demo-table">
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID.</th>
-      <td mat-cell *matCellDef="let element">{{ element?._id }}</td>
-    </ng-container>
+  <button class="btn add float-end m-3" mat-raised-button (click)="openDialog()">
+    Add Book
+  </button>
+  <ng-container *ngIf="books.length > 0; else noData">
+    <table mat-table [dataSource]="books" class="mat-elevation-z8 demo-table">
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID.</th>
+        <td mat-cell *matCellDef="let element">{{ element?._id }}</td>
+      </ng-container>
 
-    <!-- title Column -->
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef>Title</th>
-      <td mat-cell *matCellDef="let element">{{ element?.title }}</td>
-    </ng-container>
+      <!-- title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let element">{{ element?.title }}</td>
+      </ng-container>
 
-    <!-- description Column -->
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef>Description</th>
-      <td mat-cell *matCellDef="let element">{{ element?.description }}</td>
-    </ng-container>
+      <!-- description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element">{{ element?.description }}</td>
+      </ng-container>
 
-    <!-- image Column -->
-    <ng-container matColumnDef="image">
-      <th mat-header-cell *matHeaderCellDef>Image</th>
-      <td mat-cell *matCellDef="let element">
-        <img [src]="image + '/' + element.image" width="50px" class="py-2" />
-      </td>
-    </ng-container>
-    <!-- authorid Column -->
-    <ng-container matColumnDef="authorId">
-      <th mat-header-cell *matHeaderCellDef>Author</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element?.authorId?.firstName + " " + element?.authorId?.lastName }}
-      </td>
-    </ng-container>
-    <!-- categoryid Column -->
-    <ng-container matColumnDef="categoryId">
-      <th mat-header-cell *matHeaderCellDef>CategoryId</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element?.categoryId?.name }}
-      </td>
-    </ng-container>
-    <!-- reviewid Column -->
-    <ng-container matColumnDef="reviewId">
-      <th mat-header-cell *matHeaderCellDef>ReviewId</th>
-      <td mat-cell *matCellDef="let element">{{ element?.reviewId }}</td>
-    </ng-container>
+      <!-- image Column -->
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
+        <td mat-cell *matCellDef="let element">
+          <img [src]="image + '/' + element.image" width="50px" class="py-2" />
+        </td>
+      </ng-container>
+      <!-- authorid Column -->
+      <ng-container matColumnDef="authorId">
+        <th mat-header-cell *matHeaderCellDef>Author</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.authorId?.firstName + " " + element?.authorId?.lastName }}
+        </td>
+      </ng-container>
+      <!-- categoryid Column -->
+      <ng-container matColumnDef="categoryId">
+        <th mat-header-cell *matHeaderCellDef>CategoryId</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.categoryId?.name }}
+        </td>
+      </ng-container>
+      <!-- reviewid Column -->
+      <ng-container matColumnDef="reviewId">
+        <th mat-header-cell *matHeaderCellDef>ReviewId</th>
+        <td mat-cell *matCellDef="let element">{{ element?.reviewId }}</td>
+      </ng-container>
 
-    <!-- Actions Column -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let element">
-        <button class="btn btn-danger" (click)="deleteBook(element._id)">
-          Delete
-        </button>
-        <button class="btn btn-warning mx-3" (click)=" openEditDialog(element._id)">
-          Update
-        </button>
-      </td>
-    </ng-container>
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button class="btn btn-danger" (click)="deleteBook(element._id)">
+            Delete
+          </button>
+          <button class="btn btn-warning mx-3" (click)=" openEditDialog(element._id)">
+            Update
+          </button>
+        </td>
+      </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </ng-container>
 <ng-template #noData> no books to show </ng-template>
-
-<nav aria-label="Page navigation">
-  <ul class="pagination justify-content-center">
-    <li class="page-item" [class.disabled]="currentPage === 1">
-      <a class="page-link" (click)="currentPage = currentPage - 1">Previous</a>
+<br><br><br>
+<nav aria-label="Books Pagination" class="w-100" style="display: flex;justify-content:center;align-items:center;">
+  <ul class="pagination d-flex justify-content-center w-100" *ngIf="books && books.length > 0">
+    <li class="page-item" [class.disabled]="currentPage == 1">
+      <a class="page-link" (click)="prevPage()" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
     </li>
-    <li class="page-item">
-      <span class="page-link">{{currentPage }} </span>
+    <li *ngFor="let page of pages" class="page-item" [class.active]="currentPage==page">
+      <a class="page-link " (click)="setPage(page)">{{page}}</a>
     </li>
-
-
-    <li class="page-item" [class.disabled]="currentPage === totalPages">
-      <a class="page-link" (click)="currentPage = currentPage + 1">Next</a>
+    <li class="page-item" [class.disabled]="currentPage == totalPages">
+      <a class="page-link" (click)="nextPage()" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
     </li>
   </ul>
 </nav>
+

@@ -15,7 +15,7 @@ import { EditbookComponent } from '../editbook/editbook.component';
   styleUrls: ['./book-list.component.css'],
 })
 export class BookListComponent implements OnInit, OnChanges {
-  image = `${environment.APIBaseURL}/assets/uploads/book`
+  image = `${environment.APIBaseURL}/assets/uploads/book`;
   displayedColumns: string[] = [
     'id',
     'title',
@@ -26,19 +26,32 @@ export class BookListComponent implements OnInit, OnChanges {
     'reviewId',
     'actions',
   ];
-  books: Ibook[];
+  books!: Ibook[];
+  currentPage!: number;
+  pageSize!: number;
+  totalPages!: number;
+  pages: number[] = [];
   constructor(
     private dialog: MatDialog,
     private bookservice: BookService,
-    private router: Router,
-    // private pages: Number
+    private router: Router // private pages: Number
   ) {
     this.books = [];
+    this.currentPage = 1;
+    this.pageSize = 2;
+    this.totalPages = 5;
+    this.pages = [];
   }
   ngOnInit() {
     this.bookservice.getAllBooks().subscribe((bookList) => {
+      // this.getpagedBooks()
+      console.log(this.books.length);
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
       this.books = bookList;
-      console.log(this.books);
+      this.calculatePages();
+      return this.books.slice(startIndex, endIndex);
+
     });
   }
   openDialog() {
@@ -54,10 +67,12 @@ export class BookListComponent implements OnInit, OnChanges {
   openEditDialog(id: string) {
     const dialogRef = this.dialog.open(EditbookComponent, {
       width: '400px',
-      data: { bookId: id }
-    });}
+      data: { bookId: id },
+    });
+  }
   ngOnChanges() {
     this.openDialog();
+
   }
   deleteBook(id: string) {
     console.log(id);
@@ -80,23 +95,39 @@ export class BookListComponent implements OnInit, OnChanges {
     });
   }
 
-pageSize= 2;
-currentPage= 1;
-get totalPages(): number {
-    return Math.ceil(this.books.length / this.pageSize);
+  calculatePages() {
+    this.totalPages = Math.ceil(this.books.length / this.pageSize);
+
+    console.log(this.totalPages);
+    this.pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      this.pages.push(i);
+    }
   }
 
-  get pagedAuthors(): any[] {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    return this.books.slice(startIndex, endIndex);
+  setPage(page: number) {
+    this.currentPage = page;
   }
 
-  prevPage(): void {
-    this.currentPage--;
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+    console.log("next");
+
   }
 
-  nextPage(): void {
-    this.currentPage++;
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+    console.log("prev");
+
   }
+  // getpagedBooks(): any[] {
+    // const startIndex = (this.currentPage - 1) * this.pageSize;
+    // const endIndex = startIndex + this.pageSize;
+    // return this.books.slice(startIndex, endIndex);
+  // }
+
 }

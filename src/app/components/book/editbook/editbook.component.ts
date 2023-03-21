@@ -44,7 +44,7 @@ export class EditbookComponent {
       description: ['', Validators.required],
       categoryId: ['', Validators.required],
       authorId: ['', Validators.required],
-      image: ['', Validators.required],
+      image: [],
     });
     this.bookId = this.data.bookId;
     this.book = {};
@@ -72,8 +72,13 @@ export class EditbookComponent {
     });
   }
   saveData() {
+    const bookImage = this.selectedImage;
     var form: any = new FormData();
-    form.append('image', this.selectedImage, this.selectedImage.name);
+    if (bookImage) {
+      form.append('image', bookImage, bookImage?.name);
+    } else {
+      form.append('image', this.book.image);
+    }
     form.append('title', this.bookForm.get('title')?.value);
     form.append('description', this.bookForm.get('description')?.value);
     form.append('authorId', this.bookForm.get('authorId')?.value);

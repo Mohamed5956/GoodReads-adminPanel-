@@ -1,3 +1,8 @@
+.headerText {
+  color: #b3b3bb;
+  text-align: center;
+}
+
 .logo {
   text-align: center;
   padding: 2.5rem 1rem;
@@ -14,18 +19,6 @@ img {
 .mat-divider {
   border-top: 2px solid white;
 }
-/* mat-list-item {
-  margin-bottom: 4px !important;
-  border-radius: 8px;
-}
-mat-list-item {
-  color: #ffffff !important;
-  font-size: 1rem;
-  text-decoration: none;
-}
-mat-list-item:hover {
-  background-color: #2c3344 !important;
-} */
 .content {
   margin: auto;
   padding: 15px;
@@ -34,11 +27,13 @@ mat-list-item:hover {
   display: block;
   text-decoration: none;
   font-size: 1.3rem;
-  color: rgb(222, 218, 244);
+  color: #b3b3bb;
   margin: 5px 5px;
   padding: 10px;
 }
 
 .list-item-active {
-  background-color: rgba(14, 9, 91, 0.87);
+  background-color: #fdedf0;
+  color: #ff7774;
+  border-left: 4px solid #f24452;
 }
