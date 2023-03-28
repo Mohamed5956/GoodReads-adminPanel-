@@ -1,0 +1,20 @@
+<section class=" d-flex align-items-end">
+
+  <div class="container" style="z-index: 0 !important;">
+    <h1 class="font-weight-bolder"><b>OUR All BOOKS</b></h1>
+    <owl-carousel-o [options]="customOptions">
+      <ng-container *ngFor="let popular of popularList">
+        <ng-template carouselSlide>
+          <a routerLink='/books/{{ popular.book.bookId._id }}'><img [src]="image + '/' + popular.book.bookId.image"
+              class="unimation" [title]="popular.book.bookId.title"> </a>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+
+
+
+
+
+
+</section>
