@@ -17,7 +17,6 @@ import { MatSelectModule } from '@angular/material/select';
 // components
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,12 +43,16 @@ import { EditbookComponent } from './components/book/editbook/editbook.component
 
 import { DatePipe } from '@angular/common';
 
+
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
+import { CarosualComponent } from './components/carosual/carosual.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SidebarComponent,
-    DashboardComponent,
     HomeComponent,
     AddcategoryComponent,
     CategoryComponent,
@@ -63,6 +66,7 @@ import { DatePipe } from '@angular/common';
     EditcategoryComponent,
     EditauthorComponent,
     EditbookComponent,
+    CarosualComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +89,8 @@ import { DatePipe } from '@angular/common';
     // forms module
     ReactiveFormsModule,
     FormsModule,
+    // corusal
+    CarouselModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

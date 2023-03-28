@@ -4,7 +4,6 @@ import { NotFoundError } from 'rxjs';
 import { AuthorComponent } from './components/author/authorList/author.component';
 import { BookListComponent } from './components/book/book-list/book-list.component';
 import { CategoryComponent } from './components/category/categoryList/category.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
@@ -18,11 +17,6 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [AuthGuard],
-      },
       {
         path: 'category',
         component: CategoryComponent,
@@ -40,4 +34,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
