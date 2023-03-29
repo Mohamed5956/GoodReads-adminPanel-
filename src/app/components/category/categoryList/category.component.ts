@@ -31,7 +31,7 @@ export class CategoryComponent implements OnInit, OnChanges {
   ) {
     this.categories = [];
     this.currentPage = 1;
-    this.pageSize = 2;
+    this.pageSize = 10;
     this.totalPages = 5;
     this.pages = [];
     this.paginated = [];
@@ -98,11 +98,11 @@ export class CategoryComponent implements OnInit, OnChanges {
 
   setPage(page: number) {
     this.currentPage = page;
-    let start = this.currentPage *2-2
-    let end = this.currentPage *2
-    this.paginated = this.categories.slice(this.currentPage *2-2,this.currentPage *2);
-    this.count = this.currentPage *2-2;
-    this.pageSize = this.currentPage *2;
+    let start = this.currentPage *10-10
+    let end = this.currentPage *10
+    this.paginated = this.categories.slice(this.currentPage *10-10,this.currentPage *10);
+    this.count = this.currentPage *10-10;
+    this.pageSize = this.currentPage *10;
   }
 
   nextPage() {
@@ -111,8 +111,8 @@ export class CategoryComponent implements OnInit, OnChanges {
     }
     // console.log('next');
 
-    this.count += 2;
-    this.pageSize += 2;
+    this.count += 10;
+    this.pageSize += 10;
     this.paginated=this.categories.slice(this.count,this.pageSize)
   }
 
@@ -121,8 +121,8 @@ export class CategoryComponent implements OnInit, OnChanges {
       this.currentPage--;
     }
     console.log('prev');
-    this.count -= 2;
-    this.pageSize -= 2;
+    this.count -= 10;
+    this.pageSize -= 10;
     this.paginated = this.categories.slice(this.count,this.pageSize);
   }
 }
