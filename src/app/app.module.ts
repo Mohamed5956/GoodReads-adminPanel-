@@ -44,9 +44,7 @@ import { EditbookComponent } from './components/book/editbook/editbook.component
 import { DatePipe } from '@angular/common';
 
 
-import { CarouselModule } from 'ngx-owl-carousel-o';
 
-import { CarosualComponent } from './components/carosual/carosual.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +64,6 @@ import { CarosualComponent } from './components/carosual/carosual.component';
     EditcategoryComponent,
     EditauthorComponent,
     EditbookComponent,
-    CarosualComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,8 +86,6 @@ import { CarosualComponent } from './components/carosual/carosual.component';
     // forms module
     ReactiveFormsModule,
     FormsModule,
-    // corusal
-    CarouselModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
