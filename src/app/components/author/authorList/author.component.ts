@@ -23,10 +23,9 @@ export class AuthorComponent implements OnInit, OnChanges {
     'description',
     'actions',
   ];
-  showMore = false;
-
-  onShow () {
-    this.showMore = !this.showMore;
+  showMoreList: boolean[] = []
+  onShow(index: number) {
+    this.showMoreList[index] = !this.showMoreList[index];
   }
   image = `${environment.APIBaseURL}/assets/uploads/author`;
   authors: Iauthor[];
@@ -113,11 +112,11 @@ export class AuthorComponent implements OnInit, OnChanges {
 
   setPage(page: number) {
     this.currentPage = page;
-    let start = this.currentPage *10-10
-    let end = this.currentPage *10
-    this.paginated = this.authors.slice(this.currentPage *10-10,this.currentPage *10);
-    this.count = this.currentPage *10-10;
-    this.pageSize = this.currentPage *10;
+    let start = this.currentPage * 10 - 10
+    let end = this.currentPage * 10
+    this.paginated = this.authors.slice(this.currentPage * 10 - 10, this.currentPage * 10);
+    this.count = this.currentPage * 10 - 10;
+    this.pageSize = this.currentPage * 10;
   }
 
   nextPage() {
@@ -128,7 +127,7 @@ export class AuthorComponent implements OnInit, OnChanges {
 
     this.count += 10;
     this.pageSize += 10;
-    this.paginated=this.authors.slice(this.count,this.pageSize)
+    this.paginated = this.authors.slice(this.count, this.pageSize)
   }
 
   prevPage() {
@@ -138,6 +137,6 @@ export class AuthorComponent implements OnInit, OnChanges {
     console.log('prev');
     this.count -= 10;
     this.pageSize -= 10;
-    this.paginated = this.authors.slice(this.count,this.pageSize);
+    this.paginated = this.authors.slice(this.count, this.pageSize);
   }
 }

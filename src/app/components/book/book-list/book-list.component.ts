@@ -25,10 +25,9 @@ export class BookListComponent implements OnInit, OnChanges {
     'categoryId',
     'actions',
   ];
-  showMore = false;
-
-  onShow (event:MouseEvent,id:string) {
-    this.showMore = !this.showMore;
+  showMoreList: boolean[] = [];
+  onShow(index: number) {
+    this.showMoreList[index] = !this.showMoreList[index];
   }
   paginated!: any[];
   books!: Ibook[];
@@ -109,11 +108,11 @@ export class BookListComponent implements OnInit, OnChanges {
 
   setPage(page: number) {
     this.currentPage = page;
-    let start = this.currentPage *10-10
-    let end = this.currentPage *10
-    this.paginated = this.books.slice(this.currentPage *10-10,this.currentPage *10);
-    this.count = this.currentPage *10-10;
-    this.pageSize = this.currentPage *10;
+    let start = this.currentPage * 10 - 10
+    let end = this.currentPage * 10
+    this.paginated = this.books.slice(this.currentPage * 10 - 10, this.currentPage * 10);
+    this.count = this.currentPage * 10 - 10;
+    this.pageSize = this.currentPage * 10;
   }
 
   nextPage() {
@@ -124,7 +123,7 @@ export class BookListComponent implements OnInit, OnChanges {
 
     this.count += 10;
     this.pageSize += 10;
-    this.paginated=this.books.slice(this.count,this.pageSize)
+    this.paginated = this.books.slice(this.count, this.pageSize)
   }
 
   prevPage() {
@@ -134,6 +133,6 @@ export class BookListComponent implements OnInit, OnChanges {
     console.log('prev');
     this.count -= 10;
     this.pageSize -= 10;
-    this.paginated = this.books.slice(this.count,this.pageSize);
+    this.paginated = this.books.slice(this.count, this.pageSize);
   }
 }
