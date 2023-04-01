@@ -66,7 +66,6 @@ export class EditauthorComponent {
     form.append('lastName', this.authorForm.get('lastName')?.value)
     form.append('description', this.authorForm.get('description')?.value)
     for (const [key, value] of form.entries()) {
-      console.log(`${key}: ${value}`);
     }
     this.authorService.updateAuthor(this.authorId, form).subscribe({
       next: (v) => {
@@ -76,7 +75,6 @@ export class EditauthorComponent {
         this.closeDialog();
       },
       error: (e) => {
-        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -88,7 +86,6 @@ export class EditauthorComponent {
 
   onSelectedFile(event: any) {
     this.selectedImage = <File>event.target.files[0];
-    console.log(this.selectedImage);
   }
 
   closeDialog() {

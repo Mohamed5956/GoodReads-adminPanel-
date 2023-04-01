@@ -26,7 +26,6 @@ export class EditcategoryComponent {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: { categoryId: string }
 
-    // this.data.categoryId
   ) {
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
@@ -45,8 +44,6 @@ export class EditcategoryComponent {
   }
   saveData() {
     const categoryImage = this.selectedImage;
-    console.log(this.categoryForm.get('name')?.value);
-    console.log(this.categoryId);
     var form: any = new FormData;
     form.append('name', this.categoryForm.get('name')?.value);
     if (categoryImage) {
@@ -56,7 +53,6 @@ export class EditcategoryComponent {
     }
     this.categorySerivce.updateCategory(this.categoryId, form).subscribe({
       next: (v) => {
-        console.log(v);
         Swal.fire(
           'Updated Succesfully!',
           'You clicked the button!',
@@ -67,7 +63,6 @@ export class EditcategoryComponent {
         this.closeDialog();
       },
       error: (e) => {
-        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -78,7 +73,6 @@ export class EditcategoryComponent {
   }
   onSelectedFile(event: any) {
     this.selectedImage = <File>event.target.files[0];
-    console.log(this.selectedImage);
   }
   closeDialog() {
     this.dialogRef.close();

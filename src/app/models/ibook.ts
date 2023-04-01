@@ -9,5 +9,4 @@ export interface Ibook {
   authorId?: Iauthor | string;
   reviewId?: string;
   image?: string;
-  // page?: number
 }

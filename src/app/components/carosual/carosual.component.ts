@@ -19,7 +19,6 @@ export class CarosualComponent implements OnInit {
   ngOnInit(){
     this.popularService.getPopular().subscribe(popularList => {
       this.popularList = popularList
-      console.log(this.popularList)
     })
   }
   customOptions: OwlOptions = {

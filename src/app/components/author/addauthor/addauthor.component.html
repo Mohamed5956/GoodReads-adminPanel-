@@ -28,18 +28,6 @@
           authorForm.get('birthDate')?.touched
         ">birth Date is required</mat-error>
     </mat-form-field>
-    <!-- <mat-form-field appearance="fill">
-      <mat-label>Birth Date:</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="birthDate">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="
-      authorForm.get('birthDate')?.invalid &&
-      authorForm.get('birthDate')?.touched
-    ">birth Date is required</mat-error>
-    </mat-form-field> -->
-
     <mat-form-field class="example-full-width">
       <mat-label>Description:</mat-label>
       <textarea matInput placeholder="Author Description..." formControlName="description"></textarea>

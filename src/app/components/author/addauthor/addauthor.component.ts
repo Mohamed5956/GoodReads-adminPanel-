@@ -41,7 +41,6 @@ export class AddauthorComponent {
     form.append('description', this.authorForm.get('description')?.value);
     this.authorSerivce.addAuthor(form).subscribe({
       next: (v) => {
-        console.log(v);
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.AuthorAdded.emit(true);
         this.router.navigate(['/authors']);
@@ -49,7 +48,6 @@ export class AddauthorComponent {
         window.location.reload();
       },
       error: (e) => {
-        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -61,7 +59,6 @@ export class AddauthorComponent {
 
   onSelectedFile(event: any) {
     this.selectedImage = <File>event.target.files[0];
-    console.log(this.selectedImage);
   }
 
   closeDialog() {

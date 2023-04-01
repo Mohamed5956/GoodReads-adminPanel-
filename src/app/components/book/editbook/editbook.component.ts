@@ -59,16 +59,13 @@ export class EditbookComponent {
         categoryId: book.categoryId,
         authorId: book.authorId,
       });
-      console.log(book.description);
     });
     this.catService.getAllCategories().subscribe((cat) => {
       this.categories = cat;
-      console.log(this.categories);
     });
 
     this.authorService.getAllAuthors().subscribe((author) => {
       this.authors = author;
-      console.log(this.authors);
     });
   }
   saveData() {
@@ -84,7 +81,6 @@ export class EditbookComponent {
     form.append('authorId', this.bookForm.get('authorId')?.value);
     form.append('categoryId', this.bookForm.get('categoryId')?.value);
     for (const [key, value] of form.entries()) {
-      console.log(`${key}: ${value}`);
     }
     this.bookService.updateBook(this.bookId, form).subscribe({
       next: (v) => {
@@ -95,7 +91,6 @@ export class EditbookComponent {
         window.location.reload();
       },
       error: (e) => {
-        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -107,7 +102,6 @@ export class EditbookComponent {
 
   onSelectedFile(event: any) {
     this.selectedImage = <File>event.target.files[0];
-    console.log(this.selectedImage);
   }
 
   closeDialog() {

@@ -39,7 +39,7 @@ export class BookListComponent implements OnInit, OnChanges {
   constructor(
     private dialog: MatDialog,
     private bookservice: BookService,
-    private router: Router // private pages: Number
+    private router: Router
   ) {
     this.books = [];
     this.currentPage = 1;
@@ -53,7 +53,6 @@ export class BookListComponent implements OnInit, OnChanges {
       this.books = bookList;
       this.calculatePages();
       this.paginated = this.books.slice(this.count, this.pageSize);
-      console.log(this.books);
     });
   }
   openDialog() {
@@ -76,17 +75,14 @@ export class BookListComponent implements OnInit, OnChanges {
     this.openDialog();
   }
   deleteBook(id: string) {
-    console.log(id);
     this.bookservice.deleteBook(id).subscribe({
       next: (v) => {
-        console.log(v);
         Swal.fire('Deleted Succesfully!', 'You clicked the button!', 'success');
         this.books = this.books.filter((b) => b._id !== id);
 
         this.router.navigate(['/books']);
       },
       error: (e) => {
-        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -98,8 +94,6 @@ export class BookListComponent implements OnInit, OnChanges {
 
   calculatePages() {
     this.totalPages = Math.ceil(this.books.length / this.pageSize);
-
-    console.log(this.totalPages);
     this.pages = [];
     for (let i = 1; i <= this.totalPages; i++) {
       this.pages.push(i);
@@ -119,7 +113,6 @@ export class BookListComponent implements OnInit, OnChanges {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
     }
-    // console.log('next');
 
     this.count += 10;
     this.pageSize += 10;
@@ -130,7 +123,6 @@ export class BookListComponent implements OnInit, OnChanges {
     if (this.currentPage > 1) {
       this.currentPage--;
     }
-    console.log('prev');
     this.count -= 10;
     this.pageSize -= 10;
     this.paginated = this.books.slice(this.count, this.pageSize);

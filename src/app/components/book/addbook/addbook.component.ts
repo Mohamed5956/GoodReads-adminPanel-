@@ -45,12 +45,10 @@ export class AddbookComponent implements OnInit {
   ngOnInit() {
     this.catService.getAllCategories().subscribe((cat) => {
       this.categories = cat;
-      console.log(this.categories);
     });
 
     this.authorService.getAllAuthors().subscribe((author) => {
       this.authors = author;
-      console.log(this.authors);
     });
   }
   saveData() {
@@ -62,8 +60,6 @@ export class AddbookComponent implements OnInit {
     formData.append('categoryId', this.bookForm.get('categoryId')?.value);
     this.bookserivce.addBook(formData).subscribe({
       next: (v: any) => {
-        console.log(formData);
-        console.log(v);
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.BookAdded.emit(true);
         this.router.navigate(['/books']);
@@ -71,7 +67,6 @@ export class AddbookComponent implements OnInit {
         window.location.reload();
       },
       error: (e: any) => {
-        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',

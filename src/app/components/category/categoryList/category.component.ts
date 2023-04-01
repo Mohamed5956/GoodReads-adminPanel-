@@ -41,7 +41,6 @@ export class CategoryComponent implements OnInit, OnChanges {
       this.categories = catList;
       this.calculatePages();
       this.paginated = this.categories.slice(this.count, this.pageSize);
-      console.log(this.categories);
     });
   }
   openDialog() {
@@ -69,15 +68,12 @@ export class CategoryComponent implements OnInit, OnChanges {
     this.openDialog();
   }
   deleteCategory(id: string) {
-    console.log(id);
     this.categoryService.deleteCategory(id).subscribe({
       next: (v) => {
-        console.log(v);
         Swal.fire('Deleted Succesfully!', 'You clicked the button!', 'success');
         this.categories = this.categories.filter((c) => c._id !== id);
       },
       error: (e) => {
-        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -88,8 +84,6 @@ export class CategoryComponent implements OnInit, OnChanges {
   }
   calculatePages() {
     this.totalPages = Math.ceil(this.categories.length / this.pageSize);
-
-    console.log(this.totalPages);
     this.pages = [];
     for (let i = 1; i <= this.totalPages; i++) {
       this.pages.push(i);
@@ -109,8 +103,6 @@ export class CategoryComponent implements OnInit, OnChanges {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
     }
-    // console.log('next');
-
     this.count += 10;
     this.pageSize += 10;
     this.paginated=this.categories.slice(this.count,this.pageSize)
@@ -120,7 +112,6 @@ export class CategoryComponent implements OnInit, OnChanges {
     if (this.currentPage > 1) {
       this.currentPage--;
     }
-    console.log('prev');
     this.count -= 10;
     this.pageSize -= 10;
     this.paginated = this.categories.slice(this.count,this.pageSize);

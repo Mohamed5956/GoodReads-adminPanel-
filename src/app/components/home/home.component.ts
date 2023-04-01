@@ -65,12 +65,9 @@ export class HomeComponent implements OnInit {
     });
     this.bookService.getAllBooks().subscribe(books => {
       this.booksCount = books.length;
-      // this.paginated = this.books.slice(this.count, this.pageSize);
-
     });
     this.popularService.getPopular().subscribe(popularList => {
       this.popularList = popularList
-      console.log(this.popularList)
       this.paginated = this.popularList.slice(this.count, this.pageSize);
     })
     this.reviewService.getAllReviews().subscribe(reviews => {
@@ -113,8 +110,6 @@ export class HomeComponent implements OnInit {
 
   calculatePages() {
     this.totalPages = Math.ceil(this.popularList.length / this.pageSize);
-
-    console.log(this.totalPages);
     this.pages = [];
     for (let i = 1; i <= this.totalPages; i++) {
       this.pages.push(i);
@@ -134,8 +129,6 @@ export class HomeComponent implements OnInit {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
     }
-    // console.log('next');
-
     this.count += 3;
     this.pageSize += 3;
     this.paginated=this.popularList.slice(this.count,this.pageSize)
@@ -145,7 +138,6 @@ export class HomeComponent implements OnInit {
     if (this.currentPage > 1) {
       this.currentPage--;
     }
-    console.log('prev');
     this.count -= 3;
     this.pageSize -= 3;
     this.paginated = this.popularList.slice(this.count,this.pageSize);

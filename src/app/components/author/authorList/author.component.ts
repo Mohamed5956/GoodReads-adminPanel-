@@ -52,7 +52,6 @@ export class AuthorComponent implements OnInit, OnChanges {
       this.authors = authList;
       this.calculatePages();
       this.paginated = this.authors.slice(this.count, this.pageSize);
-      console.log(this.authors);
     });
   }
   openDialog() {
@@ -80,15 +79,12 @@ export class AuthorComponent implements OnInit, OnChanges {
     this.openDialog();
   }
   deleteAuthor(id: string) {
-    console.log(id);
     this.authorService.deleteAuthor(id).subscribe({
       next: (v) => {
-        console.log(v);
         Swal.fire('Deleted Succesfully!', 'You clicked the button!', 'success');
         this.authors = this.authors.filter(author => author._id !== id);
       },
       error: (e) => {
-        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -102,8 +98,6 @@ export class AuthorComponent implements OnInit, OnChanges {
   }
   calculatePages() {
     this.totalPages = Math.ceil(this.authors.length / this.pageSize);
-
-    console.log(this.totalPages);
     this.pages = [];
     for (let i = 1; i <= this.totalPages; i++) {
       this.pages.push(i);
@@ -123,8 +117,6 @@ export class AuthorComponent implements OnInit, OnChanges {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
     }
-    // console.log('next');
-
     this.count += 10;
     this.pageSize += 10;
     this.paginated = this.authors.slice(this.count, this.pageSize)
@@ -134,7 +126,6 @@ export class AuthorComponent implements OnInit, OnChanges {
     if (this.currentPage > 1) {
       this.currentPage--;
     }
-    console.log('prev');
     this.count -= 10;
     this.pageSize -= 10;
     this.paginated = this.authors.slice(this.count, this.pageSize);

@@ -27,7 +27,6 @@ export class LoginComponent {
       this.authservice.login(this.formGroup.value).subscribe
         ({
           next: (data) => {
-            console.log(data);
             if (data != null && data.isAdmin != false) {
               this.vaild_login = 1;
               localStorage.setItem('token', data.token!);

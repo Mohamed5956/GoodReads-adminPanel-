@@ -40,7 +40,6 @@ export class AddcategoryComponent {
     formData.append('image', this.selectedImage, this.selectedImage.name);
     this.categorySerivce.addCategory(formData).subscribe({
       next: (v) => {
-        console.log(v);
         Swal.fire('Added Succesfully!', 'You clicked the button!', 'success');
         this.categoryAdded.emit(true);
         this.router.navigate(['/category']);
@@ -48,7 +47,6 @@ export class AddcategoryComponent {
         window.location.reload();
       },
       error: (e) => {
-        console.error(e);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -59,7 +57,6 @@ export class AddcategoryComponent {
   }
   onSelectedFile(event: any) {
     this.selectedImage = <File>event.target.files[0];
-    console.log(this.selectedImage);
   }
   closeDialog() {
     this.dialogRef.close();

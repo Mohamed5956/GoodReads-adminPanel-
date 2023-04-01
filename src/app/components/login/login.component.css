@@ -5,14 +5,7 @@
 .ng-invalid:not(form) {
   border-left: 5px solid #a94442;
 }
-/*
-input,
-textarea,
-select {
-  border: 1px solid black;
 
-}
-*/
 
 /* Importing fonts from Google */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
@@ -66,7 +59,6 @@ select {
   font-size: 1.2rem;
   color: #666;
   padding: 10px 15px 10px 10px;
-  /* border: 1px solid red; */
 }
 
 .wrapper .form-field {
