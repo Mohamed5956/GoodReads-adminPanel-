@@ -43,3 +43,10 @@ table {
   background-color: #f9eded;
   box-shadow: 5px 10px 10px #c79696;
 }
+.sr-only{
+  cursor:pointer;
+}
+.page-link{
+  cursor:pointer;
+
+}

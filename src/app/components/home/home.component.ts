@@ -9,6 +9,8 @@ import { ReviewService } from 'src/app/services/review.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Ipopular } from 'src/app/models/ipopular';
 import { environment } from 'src/environments/environment';
+import { Iauthor } from 'src/app/models/iauthor';
+import { Ibook } from 'src/app/models/ibook';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +32,12 @@ export class HomeComponent implements OnInit {
   readedBooksCount = 0;
   readingBooksCount = 0;
   responsiveOptions!: any[];
+  paginated!: any[];
+  currentPage!: number;
+  pageSize!: number;
+  totalPages!: number;
+  pages: number[] = [];
+  count: number = 0;
 
   constructor(
     private categoryService: CategoryService,
@@ -40,20 +48,30 @@ export class HomeComponent implements OnInit {
   ) {
     this.allReviews = []
     this.popularList = []
+    this.currentPage = 1;
+    this.pageSize = 3;
+    this.totalPages = 5;
+    this.pages = [];
+    this.paginated = [];
   }
   ngOnInit() {
     this.categoryService.getAllCategories().subscribe(categories => {
       this.categoriesCount = categories.length;
+
     });
     this.authorsService.getAllAuthors().subscribe(authors => {
       this.authorsCount = authors.length;
+
     });
     this.bookService.getAllBooks().subscribe(books => {
       this.booksCount = books.length;
+      // this.paginated = this.books.slice(this.count, this.pageSize);
+
     });
     this.popularService.getPopular().subscribe(popularList => {
       this.popularList = popularList
       console.log(this.popularList)
+      this.paginated = this.popularList.slice(this.count, this.pageSize);
     })
     this.reviewService.getAllReviews().subscribe(reviews => {
       this.wantToReadBooksCount = reviews.filter(review => review.status == 'want to read').length
@@ -93,5 +111,43 @@ export class HomeComponent implements OnInit {
     nav: true,
   };
 
+  calculatePages() {
+    this.totalPages = Math.ceil(this.popularList.length / this.pageSize);
 
+    console.log(this.totalPages);
+    this.pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      this.pages.push(i);
+    }
+  }
+
+  setPage(page: number) {
+    this.currentPage = page;
+    let start = this.currentPage *3-3
+    let end = this.currentPage *3
+    this.paginated = this.popularList.slice(this.currentPage *3-3,this.currentPage *3);
+    this.count = this.currentPage *3-3;
+    this.pageSize = this.currentPage *3;
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+    // console.log('next');
+
+    this.count += 3;
+    this.pageSize += 3;
+    this.paginated=this.popularList.slice(this.count,this.pageSize)
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+    console.log('prev');
+    this.count -= 3;
+    this.pageSize -= 3;
+    this.paginated = this.popularList.slice(this.count,this.pageSize);
+  }
 }
